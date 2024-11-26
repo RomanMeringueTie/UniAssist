@@ -2,7 +2,7 @@
 ### Отображается информация о занятиии и задании
 ### Есть кнопка для отправки ответа на задания
 ## Методы API:
-### При переходе на экран: GET student_scheduleById (параметры - id, date, group и start_time)
+### При переходе на экран: GET student_classById (параметры - id)
 - ### Успех: Получаем занятие (class).
 - ### class:
     - #### subject
@@ -12,6 +12,7 @@
     - #### teacher
     - #### classroom
     - #### task
+        - #### id
         - #### header
         - #### body
         - #### responses []:
@@ -19,5 +20,5 @@
             - #### student_id
             - #### body
             - #### mark
-### При нажатии кнопки отправить ответ: POST student_responseById (параметры - id, student_id, body)
+### При нажатии кнопки отправить ответ: POST student_responseById (параметры - id, body)
 - ### Успех: Сообщение об успехе

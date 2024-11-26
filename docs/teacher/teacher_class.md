@@ -1,8 +1,24 @@
 # Экран занятия / задания
 ### Отображается информация о занятиии и задании, список ответов от студентов
-### Есть кнопка для оценки ответа
+### Есть кнопка для просмотра и оценки ответов
 ## Методы API:
-### При переходе на экран: GET teacher_scheduleById (параметры - id, date и teacher_id)
+### При переходе на экран: GET teacher_classById (параметры - id)
 - ### Успех: Получаем занятие (class).
-### При нажатии кнопки отправить ответ: PATCH teacher_responseById (параметры - id, student_id, date, group, start_time, mark)
+- ### class:
+    - #### subject
+    - #### start_time
+    - #### end_time
+    - #### type
+    - #### group
+    - #### classroom
+    - #### task
+        - #### id
+        - #### header
+        - #### body
+        - #### responses []:
+            - #### id
+            - #### student_id
+            - #### body
+            - #### mark
+### При нажатии кнопки отправить ответ: PATCH teacher_responseById (параметры - id, mark)
 - ### Успех: Сообщение об успехе

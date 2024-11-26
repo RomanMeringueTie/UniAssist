@@ -2,13 +2,15 @@
 ### Отображается список занятий и заголовков заданий к ним на сегодняшний день.
 ### При нажатии на предмет - переход на экран занятия / задания
 ## Методы API:
-### При переходе на экран: GET teacher_schedule (параметры - date, teacher_id)
+### При переходе на экран: GET teacher_schedule (параметры - date)
 - ### Успех: Получаем список занятий (classes).
 - #### classes []:
-    - #### id
-    - #### subject
-    - #### group
-    - #### start_time
-    - #### end_time
-    - #### type
-    - #### classroom
+  - #### id
+  - #### subject
+  - #### start_time
+  - #### end_time
+  - #### type
+  - #### group
+  - #### classroom
+  - #### task
+    - #### header
