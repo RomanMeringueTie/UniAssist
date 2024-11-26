@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "UniAssist"
 include(":app")
- 
+include(":app:core")
+include(":app:student")
+include(":app:teacher")
