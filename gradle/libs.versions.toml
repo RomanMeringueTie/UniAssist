@@ -1,5 +1,6 @@
 [versions]
-agp = "8.5.0"
+alp = "8.5.2"
+agp = "8.5.2"
 dagger = "2.51.1"
 kotlin = "1.9.0"
 coreKtx = "1.15.0"
@@ -39,6 +40,7 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
+android-library = { id = "com.android.library", version.ref = "alp"}
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 

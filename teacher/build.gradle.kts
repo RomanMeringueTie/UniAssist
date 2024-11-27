@@ -1,19 +1,15 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "ru.sibsutis.teacher"
+    namespace = "ru.sibsutis.student"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ru.sibsutis.teacher"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,9 +33,10 @@ android {
 }
 
 dependencies {
-    // Dagger 2
+    implementation(project(":core"))
+
+// Dagger 2
     implementation(libs.dagger)
-    implementation(project(":app:core"))
     kapt(libs.dagger.compiler)
 
     // Jetpack Compose
