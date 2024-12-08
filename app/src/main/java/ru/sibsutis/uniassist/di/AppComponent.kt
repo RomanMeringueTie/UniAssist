@@ -6,7 +6,7 @@ import ru.sibsutis.student.di.StudentModule
 import ru.sibsutis.student.presentation.StudentScheduleViewModel
 import ru.sibsutis.uniassist.MainActivity
 
-@Component(modules = [StudentModule::class, CoreModule::class])
+@Component(modules = [CoreModule::class])
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
 }
