@@ -1,5 +1,6 @@
 package ru.sibsutis.uniassist.navigation
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Email
@@ -15,44 +16,49 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import ru.sibsutis.uniassist.R
 
-const val SCHEDULE_ROUTE = "SCHEDULE"
-const val MESSAGES_ROUTE = "MESSAGES"
-const val PROFILE_ROUTE = "PROFILE"
+internal const val SCHEDULE_ROUTE = "SCHEDULE"
+internal const val MESSAGES_ROUTE = "MESSAGES"
+internal const val PROFILE_ROUTE = "PROFILE"
 
 @Composable
 fun BottomBar(navController: NavController) {
-    val itemsList = listOf(
-        BottomBarItem(
-            title = "Schedule",
-            route = SCHEDULE_ROUTE,
-            selectedIcon = Icons.Filled.DateRange,
-            unselectedIcon = Icons.Outlined.DateRange
-        ),
-        BottomBarItem(
-            title = "Messages",
-            route = MESSAGES_ROUTE,
-            selectedIcon = Icons.Filled.Email,
-            unselectedIcon = Icons.Outlined.Email
-        ),
-        BottomBarItem(
-            title = "Profile",
-            route = PROFILE_ROUTE,
-            selectedIcon = Icons.Filled.Person,
-            unselectedIcon = Icons.Outlined.Person
+    val itemsList = remember {
+        listOf(
+            BottomBarItem(
+                titleRes = R.string.schedule,
+                route = SCHEDULE_ROUTE,
+                selectedIcon = Icons.Filled.DateRange,
+                unselectedIcon = Icons.Outlined.DateRange
+            ),
+            BottomBarItem(
+                titleRes = R.string.messages,
+                route = MESSAGES_ROUTE,
+                selectedIcon = Icons.Filled.Email,
+                unselectedIcon = Icons.Outlined.Email
+            ),
+            BottomBarItem(
+                titleRes = R.string.profile,
+                route = PROFILE_ROUTE,
+                selectedIcon = Icons.Filled.Person,
+                unselectedIcon = Icons.Outlined.Person
+            )
         )
-    )
+    }
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
     NavigationBar {
-        itemsList.mapIndexed { index, item ->
+        itemsList.forEachIndexed { index, item ->
             NavigationBarItem(
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
-                    navController.navigate(item.title)
+                    navController.navigate(item.route)
                 },
                 icon = {
                     BadgedBox(badge = { Badge() }) {
@@ -62,7 +68,7 @@ fun BottomBar(navController: NavController) {
                             } else {
                                 item.unselectedIcon
                             },
-                            contentDescription = item.title
+                            contentDescription = stringResource(id = item.titleRes)
                         )
                     }
                 }

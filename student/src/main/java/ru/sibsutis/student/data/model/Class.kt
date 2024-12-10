@@ -1,5 +1,7 @@
 package ru.sibsutis.student.data.model
 
+import java.time.LocalDate
+
 enum class ClassType {
     LECTURE,
     PRACTICE,
@@ -8,8 +10,8 @@ enum class ClassType {
 
 data class Task(val header: String)
 
-data class Class (
-    val id: Int,
+data class Class(
+    val id: LocalDate,
     val subject: String,
     val startTime: Long,
     val endTime: Long,

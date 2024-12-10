@@ -1,9 +1,10 @@
 package ru.sibsutis.uniassist.navigation
 
+import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
 
 data class BottomBarItem(
-    val title: String,
+    @StringRes val titleRes: Int,
     val route: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,

@@ -6,6 +6,7 @@ import kotlinx.coroutines.delay
 import kotlinx.serialization.Serializable
 import ru.sibsutis.student.data.model.ClassType
 import ru.sibsutis.student.data.model.Task
+import java.time.LocalDate
 
 @Serializable
 data class Classes(val classes: List<Class>)
@@ -19,8 +20,8 @@ class StudentService(private val ktorClient: KtorClient) {
 //        }.body()
 //        return response.classes
 //    }
-    suspend fun getSchedule(date: Int): List<Class> {
-        delay(2000)
+    suspend fun getSchedule(date: LocalDate): List<Class> {
+        delay(10)
         return listOf(
             Class(
                 id = date,
