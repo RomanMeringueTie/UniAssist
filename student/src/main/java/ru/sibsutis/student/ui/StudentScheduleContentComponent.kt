@@ -11,8 +11,9 @@ import ru.sibsutis.student.data.model.Class
 
 @Composable
 fun StudentScheduleContentComponent(list: List<Class>) {
+    val immutableList = list.toList()
     LazyColumn {
-        items(list) {
+        items(immutableList) {
             Text(text = "${it.id}")
         }
     }

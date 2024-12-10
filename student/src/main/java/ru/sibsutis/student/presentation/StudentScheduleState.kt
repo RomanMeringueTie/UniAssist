@@ -1,8 +1,10 @@
 package ru.sibsutis.student.presentation
 
+import androidx.compose.runtime.Immutable
 import java.time.LocalDate
 
+@Immutable
 data class StudentScheduleState(
-    var listState: StudentScheduleListState = StudentScheduleListState.Loading,
-    var date: LocalDate = LocalDate.now()
+    val listState: StudentScheduleListState = StudentScheduleListState.Loading,
+    val date: LocalDate = LocalDate.now()
 )

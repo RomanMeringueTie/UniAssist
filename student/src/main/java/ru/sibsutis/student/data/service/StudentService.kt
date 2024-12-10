@@ -21,7 +21,7 @@ class StudentService(private val ktorClient: KtorClient) {
 //        return response.classes
 //    }
     suspend fun getSchedule(date: LocalDate): List<Class> {
-        delay(10)
+        delay(1000)
         return listOf(
             Class(
                 id = date,

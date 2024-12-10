@@ -1,5 +1,6 @@
 package ru.sibsutis.student.data.model
 
+import androidx.compose.runtime.Immutable
 import java.time.LocalDate
 
 enum class ClassType {
@@ -8,8 +9,10 @@ enum class ClassType {
     LABORATORY
 }
 
+@Immutable
 data class Task(val header: String)
 
+@Immutable
 data class Class(
     val id: LocalDate,
     val subject: String,

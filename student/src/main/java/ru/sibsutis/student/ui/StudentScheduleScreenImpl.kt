@@ -17,9 +17,7 @@ fun StudentScheduleScreenImpl(
     onAction: () -> Unit
 ) {
 
-    val currentState by rememberUpdatedState(newValue = state)
-
-    when (val s = currentState.listState) {
+    when (val s = state.listState) {
         is StudentScheduleListState.Content -> {
             StudentScheduleContentComponent(s.list)
         }
