@@ -1,6 +1,7 @@
 package ru.sibsutis.student.di
 
 import dagger.Component
+import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.core.di.CoreModule
 import ru.sibsutis.student.presentation.StudentScheduleViewModel
 
@@ -10,5 +11,6 @@ interface StudentComponent {
     interface Builder {
         fun build(): StudentComponent
     }
+
     fun getScheduleViewModel(): StudentScheduleViewModel
 }

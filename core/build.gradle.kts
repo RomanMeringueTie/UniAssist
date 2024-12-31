@@ -58,6 +58,9 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.tooling.preview.android)
+    // DateTime
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
+
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.core.ktx)

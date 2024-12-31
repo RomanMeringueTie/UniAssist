@@ -1,51 +1,36 @@
 package ru.sibsutis.core.utils
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
-import ru.sibsutis.core.R
+import kotlinx.datetime.Clock
+import kotlinx.datetime.DateTimeUnit
+import java.text.SimpleDateFormat
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
+import kotlinx.datetime.todayIn
 import java.util.Calendar
+import java.util.Locale
 
-class CalendarUtil {
-    private val calendar = Calendar.getInstance()
-    val weekDaysIds = listOf(
-        R.string.monday,
-        R.string.tuesday,
-        R.string.wednesday,
-        R.string.thursday,
-        R.string.friday,
-        R.string.saturday
-    )
-
-    private val monthsIds = listOf(
-        R.string.january,
-        R.string.february,
-        R.string.march,
-        R.string.april,
-        R.string.may,
-        R.string.june,
-        R.string.july,
-        R.string.august,
-        R.string.september,
-        R.string.october,
-        R.string.november,
-        R.string.december
-    )
-
+object CalendarUtil {
+    @SuppressLint("SimpleDateFormat")
     @Composable
     fun getToday(): String {
-        val calendar = Calendar.getInstance()
-        val year: Int = calendar.get(Calendar.YEAR)
-        val month: Int = calendar.get(Calendar.MONTH)
-        val day: Int = calendar.get(Calendar.DAY_OF_MONTH)
-        return "$day ${stringResource(monthsIds[month])} $year"
+        val date = SimpleDateFormat("dd MMMM yyyy", Locale("ru"))
+        val list = date.format(Calendar.getInstance(Locale("ru")).time).split(' ')
+        return "${list[0]} ${list[1].replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }} ${list[2]}"
     }
 
-    fun getFirstWeekDay(): Int {
-        return calendar.get(Calendar.DAY_OF_MONTH) - calendar.get(Calendar.DAY_OF_WEEK) + 1
+    fun getWeekDays(): List<LocalDate> {
+        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        val first = today.minus(today.dayOfWeek.value - 1, DateTimeUnit.DAY)
+        val weekDaysList = mutableListOf(first)
+        for (i in 1 until 6) {
+            weekDaysList.add(first.plus(i, DateTimeUnit.DAY))
+        }
+        return weekDaysList
     }
 
-    fun getTodayInt(): Int {
-        return calendar.get(Calendar.DAY_OF_MONTH)
-    }
+    fun isToday(date: LocalDate) = Clock.System.todayIn(TimeZone.currentSystemDefault()) == date
 }

@@ -41,12 +41,15 @@ android {
 
 dependencies {
     implementation(project(":core"))
-// Ktor
+
+    // Immutable Collections
+    implementation(libs.jetbrains.kotlinx.collections.immutable)
+    // Ktor
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.logging)
 
-// Dagger 2
+    // Dagger 2
     implementation(libs.dagger)
     implementation(libs.androidx.foundation.layout.android)
     kapt(libs.dagger.compiler)
@@ -55,6 +58,9 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.tooling.preview.android)
+
+    // Date Time
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
 
     implementation(libs.androidx.material3)
     implementation(libs.androidx.core.ktx)

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ru.sibsutis.core.di.DaggerCoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 import ru.sibsutis.student.di.DaggerStudentComponent
 import ru.sibsutis.student.presentation.StudentScheduleViewModel
@@ -26,7 +27,6 @@ import ru.sibsutis.uniassist.ui.theme.UniAssistTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        DaggerAppComponent.builder().build().inject(this)
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
@@ -44,8 +44,8 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(SCHEDULE_ROUTE) {
                             val component = DaggerStudentComponent.builder().build()
-                            val viewModel: StudentScheduleViewModel =
-                                daggerViewModel { component.getScheduleViewModel() }
+                            val viewModel =
+                                daggerViewModel(key = "ScheduleViewModel") { component.getScheduleViewModel() }
                             StudentScheduleScreen(viewModel)
                         }
                         composable(MESSAGES_ROUTE) {

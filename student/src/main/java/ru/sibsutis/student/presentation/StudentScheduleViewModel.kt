@@ -1,13 +1,12 @@
 package ru.sibsutis.student.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
 import ru.sibsutis.student.domain.GetStudentScheduleUseCase
-import java.time.LocalDate
 
 class StudentScheduleViewModel(
     private val getStudentScheduleUseCase: GetStudentScheduleUseCase
@@ -19,8 +18,11 @@ class StudentScheduleViewModel(
         loadSchedule()
     }
 
-    fun changePickedDate(index: Int) {
-        _state.value = _state.value.copy(date = LocalDate.now().plusDays(index.toLong()))
+    fun changePickedDate(date: LocalDate) {
+        _state.value = _state.value.copy(
+            date = date,
+            listState = StudentScheduleListState.Loading
+        )
         loadSchedule()
     }
 
@@ -30,12 +32,16 @@ class StudentScheduleViewModel(
         }
         viewModelScope.launch {
             val result = getStudentScheduleUseCase(_state.value.date)
-            if (result.isSuccess)
-                _state.value =
-                    _state.value.copy(listState = StudentScheduleListState.Content(result.getOrNull()!!))
-            else
-                _state.value =
-                    _state.value.copy(listState = StudentScheduleListState.Failure(result.exceptionOrNull()?.message))
+            result.fold(
+                onSuccess = {
+                    _state.value =
+                        _state.value.copy(listState = StudentScheduleListState.Content(result.getOrNull()!!))
+                },
+                onFailure = {
+                    _state.value =
+                        _state.value.copy(listState = StudentScheduleListState.Failure(result.exceptionOrNull()?.message))
+                }
+            )
         }
     }
 }

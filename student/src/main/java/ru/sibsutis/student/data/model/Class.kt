@@ -1,7 +1,6 @@
 package ru.sibsutis.student.data.model
 
-import androidx.compose.runtime.Immutable
-import java.time.LocalDate
+import kotlinx.datetime.LocalTime
 
 enum class ClassType {
     LECTURE,
@@ -9,17 +8,15 @@ enum class ClassType {
     LABORATORY
 }
 
-@Immutable
 data class Task(val header: String)
 
-@Immutable
 data class Class(
-    val id: LocalDate,
+    val id: Int,
     val subject: String,
-    val startTime: Long,
-    val endTime: Long,
+    val startTime: LocalTime,
+    val endTime: LocalTime,
     val type: ClassType,
     val teacher: String,
     val classroom: String,
-    val task: Task
+    val task: Task? = null
 )

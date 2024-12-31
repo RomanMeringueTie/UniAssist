@@ -1,6 +1,5 @@
 package ru.sibsutis.uniassist.navigation
 
-import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Email
@@ -28,7 +27,7 @@ internal const val MESSAGES_ROUTE = "MESSAGES"
 internal const val PROFILE_ROUTE = "PROFILE"
 
 @Composable
-fun BottomBar(navController: NavController) {
+internal fun BottomBar(navController: NavController) {
     val itemsList = remember {
         listOf(
             BottomBarItem(
@@ -75,5 +74,4 @@ fun BottomBar(navController: NavController) {
             )
         }
     }
-
 }

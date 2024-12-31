@@ -1,10 +1,13 @@
 package ru.sibsutis.student.presentation
 
 import androidx.compose.runtime.Immutable
-import java.time.LocalDate
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.todayIn
+import kotlin.time.measureTime
 
-@Immutable
 data class StudentScheduleState(
     val listState: StudentScheduleListState = StudentScheduleListState.Loading,
-    val date: LocalDate = LocalDate.now()
+    val date: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
 )
