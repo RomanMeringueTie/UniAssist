@@ -69,18 +69,13 @@ class MainActivity : ComponentActivity() {
                             Text(text = "Profile")
                         }
                         composable<Route.ClassRoute> { backStackEntry ->
+                            val component = DaggerStudentComponent.builder().build()
+                            val viewModel =
+                                daggerViewModel(key = "ClassViewModel") { component.getClassViewModel() }
                             val id = backStackEntry.toRoute<Route.ClassRoute>().id
                             StudentClassScreen(
-                                viewModel = StudentClassViewModel(
-                                    GetStudentClassUseCase(
-                                        StudentRepositoryImpl(
-                                            StudentService(
-                                                KtorClient()
-                                            )
-                                        )
-                                    ),
-                                    id = id
-                                )
+                                viewModel = viewModel,
+                                id = id
                             )
                         }
                     }

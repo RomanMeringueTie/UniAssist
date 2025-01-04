@@ -10,8 +10,7 @@ import kotlinx.coroutines.launch
 import ru.sibsutis.student.domain.GetStudentClassUseCase
 
 class StudentClassViewModel(
-    private val getStudentClassUseCase: GetStudentClassUseCase,
-    val id: Int
+    private val getStudentClassUseCase: GetStudentClassUseCase
 ) :
     ViewModel() {
 
@@ -19,11 +18,7 @@ class StudentClassViewModel(
         MutableStateFlow(StudentClassState.Loading)
     val state: StateFlow<StudentClassState> = _state
 
-    init {
-        loadClass(id)
-    }
-
-    private fun loadClass(id: Int) {
+    fun loadClass(id: Int) {
         if (_state.value !is StudentClassState.Loading)
             return
         viewModelScope.launch {

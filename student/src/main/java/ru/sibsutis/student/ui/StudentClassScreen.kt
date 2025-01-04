@@ -11,9 +11,12 @@ import ru.sibsutis.student.presentation.StudentClassState
 import ru.sibsutis.student.presentation.StudentClassViewModel
 
 @Composable
-fun StudentClassScreen(viewModel: StudentClassViewModel) {
+fun StudentClassScreen(viewModel: StudentClassViewModel, id: Int) {
 
     val state by viewModel.state.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) {
+        viewModel.loadClass(id)
+    }
 
     StudentClassScreenImpl(state = state)
 
