@@ -6,10 +6,16 @@ import ru.sibsutis.student.data.service.StudentService
 
 interface StudentRepository {
     suspend fun getSchedule(date: LocalDate): List<Class>
+    suspend fun getClass(id: Int): Class
 }
 
 class StudentRepositoryImpl(private val service: StudentService) : StudentRepository {
     override suspend fun getSchedule(date: LocalDate): List<Class> {
         return service.getSchedule(date)
+    }
+
+    override suspend fun getClass(id: Int): Class {
+        return service.getClass(id)
+
     }
 }

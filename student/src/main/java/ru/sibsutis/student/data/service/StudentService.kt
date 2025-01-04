@@ -20,65 +20,72 @@ class StudentService(private val ktorClient: KtorClient) {
 //        }.body()
 //        return response.classes
 //    }
+    private val list = listOf(
+        Class(
+            id = 0,
+            subject = "Схемотехника",
+            startTime = LocalTime(8, 0),
+            endTime = LocalTime(9, 35),
+            type = ClassType.LABORATORY,
+            teacher = "Иванов В. П.",
+            classroom = "1 - 201",
+            task = Task("Лабораторная № 3")
+        ),
+        Class(
+            id = 1,
+            subject = "Архитектура ЭВМ",
+            startTime = LocalTime(9, 50),
+            endTime = LocalTime(11, 25),
+            type = ClassType.LABORATORY,
+            teacher = "Сидоров С. А.",
+            classroom = "5 - 213",
+            task = Task("Лабораторная № 4")
+        ),
+        Class(
+            id = 2,
+            subject = "Экономика",
+            startTime = LocalTime(11, 40),
+            endTime = LocalTime(13, 15),
+            type = ClassType.LABORATORY,
+            teacher = "Калинина М. Л.",
+            classroom = "3 - 416",
+        ),
+        Class(
+            id = 3,
+            subject = "Философия",
+            startTime = LocalTime(13, 45),
+            endTime = LocalTime(15, 20),
+            type = ClassType.LABORATORY,
+            teacher = "Калинина М. Л.",
+            classroom = "3 - 416",
+        ),
+        Class(
+            id = 4,
+            subject = "Русский язык",
+            startTime = LocalTime(15, 35),
+            endTime = LocalTime(17, 10),
+            type = ClassType.LABORATORY,
+            teacher = "Калинина М. Л.",
+            classroom = "3 - 416",
+        ),
+        Class(
+            id = 5,
+            subject = "Сети ЭВМ и Телекоммуникации",
+            startTime = LocalTime(17, 25),
+            endTime = LocalTime(19, 0),
+            type = ClassType.LABORATORY,
+            teacher = "Калинина М. Л.",
+            classroom = "3 - 416",
+        )
+    )
+
     suspend fun getSchedule(date: LocalDate): List<Class> {
         delay(1000)
-        return listOf(
-            Class(
-                id = 0,
-                subject = "Схемотехника",
-                startTime = LocalTime(8, 0),
-                endTime = LocalTime(9, 35),
-                type = ClassType.LABORATORY,
-                teacher = "Иванов В. П.",
-                classroom = "1 - 201",
-                task = Task("Лабораторная № 3")
-            ),
-            Class(
-                id = 1,
-                subject = "Архитектура ЭВМ",
-                startTime = LocalTime(9, 50),
-                endTime = LocalTime(11, 25),
-                type = ClassType.LABORATORY,
-                teacher = "Сидоров С. А.",
-                classroom = "5 - 213",
-                task = Task("Лабораторная № 4")
-            ),
-            Class(
-                id = 2,
-                subject = "Экономика",
-                startTime = LocalTime(11, 40),
-                endTime = LocalTime(13, 15),
-                type = ClassType.LABORATORY,
-                teacher = "Калинина М. Л.",
-                classroom = "3 - 416",
-            ),
-            Class(
-                id = 3,
-                subject = "Философия",
-                startTime = LocalTime(13, 45),
-                endTime = LocalTime(15, 20),
-                type = ClassType.LABORATORY,
-                teacher = "Калинина М. Л.",
-                classroom = "3 - 416",
-            ),
-            Class(
-                id = 4,
-                subject = "Русский язык",
-                startTime = LocalTime(15, 35),
-                endTime = LocalTime(17, 10),
-                type = ClassType.LABORATORY,
-                teacher = "Калинина М. Л.",
-                classroom = "3 - 416",
-            ),
-            Class(
-                id = 5,
-                subject = "Сети ЭВМ и Телекоммуникации",
-                startTime = LocalTime(17, 25),
-                endTime = LocalTime(19, 0),
-                type = ClassType.LABORATORY,
-                teacher = "Калинина М. Л.",
-                classroom = "3 - 416",
-            )
-        )
+        return list
+    }
+
+    suspend fun getClass(id: Int): Class {
+        delay(1000)
+        return list[id]
     }
 }

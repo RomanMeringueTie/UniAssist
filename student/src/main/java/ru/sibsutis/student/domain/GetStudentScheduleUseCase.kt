@@ -1,6 +1,5 @@
 package ru.sibsutis.student.domain
 
-import android.util.Log
 import kotlinx.datetime.LocalDate
 import ru.sibsutis.student.data.model.Class
 import ru.sibsutis.student.data.repository.StudentRepository

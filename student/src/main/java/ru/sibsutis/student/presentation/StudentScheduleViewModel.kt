@@ -35,11 +35,11 @@ class StudentScheduleViewModel(
             result.fold(
                 onSuccess = {
                     _state.value =
-                        _state.value.copy(listState = StudentScheduleListState.Content(result.getOrNull()!!))
+                        _state.value.copy(listState = StudentScheduleListState.Content(it))
                 },
                 onFailure = {
                     _state.value =
-                        _state.value.copy(listState = StudentScheduleListState.Failure(result.exceptionOrNull()?.message))
+                        _state.value.copy(listState = StudentScheduleListState.Failure(it.message))
                 }
             )
         }
