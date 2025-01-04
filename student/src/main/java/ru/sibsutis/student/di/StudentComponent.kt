@@ -3,6 +3,7 @@ package ru.sibsutis.student.di
 import dagger.Component
 import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.core.di.CoreModule
+import ru.sibsutis.student.presentation.StudentClassViewModel
 import ru.sibsutis.student.presentation.StudentScheduleViewModel
 import javax.inject.Singleton
 
@@ -15,4 +16,6 @@ interface StudentComponent {
     }
 
     fun getScheduleViewModel(): StudentScheduleViewModel
+
+    fun getClassViewModel(): StudentClassViewModel
 }
