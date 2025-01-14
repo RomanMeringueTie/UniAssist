@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -28,7 +29,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
 
     compileOptions {
@@ -59,7 +60,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.tooling.preview.android)
     // DateTime
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
+    implementation(libs.kotlinx.datetime)
 
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)

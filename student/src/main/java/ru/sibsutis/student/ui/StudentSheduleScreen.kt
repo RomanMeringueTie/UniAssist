@@ -84,21 +84,19 @@ fun StudentScheduleScreen(viewModel: StudentScheduleViewModel) {
                             }
                             .background(color = colorResource(id = colorId))
                             .padding(top = 10.dp, bottom = 20.dp, start = 15.dp, end = 15.dp))
-                    LazyColumn(
+                    Column(
                         modifier = modifier,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        item {
-                            Text(
-                                text = it.dayOfMonth.toString(),
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Text(
-                                text = stringResource(id = weekDaysIds[it.dayOfWeek.value - 1]),
-                                fontSize = 12.sp
-                            )
-                        }
+                        Text(
+                            text = it.dayOfMonth.toString(),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = stringResource(id = weekDaysIds[it.dayOfWeek.value - 1]),
+                            fontSize = 12.sp
+                        )
                     }
                 }
             }

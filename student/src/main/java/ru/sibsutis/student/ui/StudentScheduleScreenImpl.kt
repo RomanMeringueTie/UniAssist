@@ -15,6 +15,7 @@ import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentList
 import ru.sibsutis.student.R
 import ru.sibsutis.student.presentation.StudentScheduleListState
@@ -30,7 +31,7 @@ fun StudentScheduleScreenImpl(
     when (state.listState) {
         is StudentScheduleListState.Content -> {
             StudentScheduleContentComponent(
-                state.listState.list.toPersistentList(),
+                state.listState.list.toImmutableList(),
                 onSwipeLeft,
                 onSwipeRight
             )

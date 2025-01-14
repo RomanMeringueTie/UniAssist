@@ -8,9 +8,6 @@ import kotlinx.datetime.LocalTime
 import ru.sibsutis.student.data.model.ClassType
 import ru.sibsutis.student.data.model.Task
 
-//@Serializable
-//data class Classes(val classes: List<Class>)
-
 class StudentService(private val ktorClient: KtorClient) {
     //    suspend fun getSchedule(date: Long): List<Class> {
 //        val response: Classes = ktorClient.client.get("/student_schedule/$date") {

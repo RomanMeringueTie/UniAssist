@@ -48,7 +48,7 @@ import ru.sibsutis.student.data.model.Class
 
 @Composable
 fun StudentScheduleContentComponent(
-    list: PersistentList<Class>,
+    list: ImmutableList<Class>,
     onSwipeRight: () -> Unit,
     onSwipeLeft: () -> Unit
 ) {
