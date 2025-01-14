@@ -45,7 +45,7 @@ import ru.sibsutis.student.presentation.StudentScheduleViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun StudentScheduleScreen(viewModel: StudentScheduleViewModel) {
+fun StudentScheduleScreen(viewModel: StudentScheduleViewModel, onClassClicked: (id: Int) -> Unit) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     Column {
         Column(
@@ -101,8 +101,11 @@ fun StudentScheduleScreen(viewModel: StudentScheduleViewModel) {
                 }
             }
         }
-        StudentScheduleScreenImpl(state = state,
+        StudentScheduleScreenImpl(
+            state = state,
             { viewModel.changePickedDate(state.date.plus(1, DateTimeUnit.DAY)) },
-            { viewModel.changePickedDate(state.date.minus(1, DateTimeUnit.DAY)) })
+            { viewModel.changePickedDate(state.date.minus(1, DateTimeUnit.DAY)) },
+            onClassClicked
+        )
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -19,12 +20,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import ru.sibsutis.uniassist.R
-
-internal const val SCHEDULE_ROUTE = "SCHEDULE"
-internal const val MESSAGES_ROUTE = "MESSAGES"
-internal const val PROFILE_ROUTE = "PROFILE"
 
 @Composable
 internal fun BottomBar(navController: NavController) {
@@ -32,19 +30,20 @@ internal fun BottomBar(navController: NavController) {
         listOf(
             BottomBarItem(
                 titleRes = R.string.schedule,
-                route = SCHEDULE_ROUTE,
+                route = Route.ScheduleRoute,
                 selectedIcon = Icons.Filled.DateRange,
                 unselectedIcon = Icons.Outlined.DateRange
             ),
             BottomBarItem(
                 titleRes = R.string.messages,
-                route = MESSAGES_ROUTE,
+                route = Route.MessageRoute,
                 selectedIcon = Icons.Filled.Email,
-                unselectedIcon = Icons.Outlined.Email
+                unselectedIcon = Icons.Outlined.Email,
+                badgeAmount = 2
             ),
             BottomBarItem(
                 titleRes = R.string.profile,
-                route = PROFILE_ROUTE,
+                route = Route.ProfileRoute,
                 selectedIcon = Icons.Filled.Person,
                 unselectedIcon = Icons.Outlined.Person
             )
@@ -60,7 +59,7 @@ internal fun BottomBar(navController: NavController) {
                     navController.navigate(item.route)
                 },
                 icon = {
-                    BadgedBox(badge = { Badge() }) {
+                    BadgedBox(badge = { if (item.badgeAmount != null) Badge { Text(text = item.badgeAmount.toString()) } }) {
                         Icon(
                             imageVector = if (selectedItem == index) {
                                 item.selectedIcon
@@ -70,7 +69,8 @@ internal fun BottomBar(navController: NavController) {
                             contentDescription = stringResource(id = item.titleRes)
                         )
                     }
-                }
+                },
+                label = { Text(text = stringResource(id = item.titleRes), fontSize = 12.sp) }
             )
         }
     }

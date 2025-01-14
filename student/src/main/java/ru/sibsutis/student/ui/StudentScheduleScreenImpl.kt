@@ -17,6 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentList
+import ru.sibsutis.core.ui.ErrorDialog
+import ru.sibsutis.core.ui.LoadingComponent
 import ru.sibsutis.student.R
 import ru.sibsutis.student.presentation.StudentScheduleListState
 import ru.sibsutis.student.presentation.StudentScheduleState
@@ -26,32 +28,25 @@ import ru.sibsutis.student.presentation.StudentScheduleState
 fun StudentScheduleScreenImpl(
     state: StudentScheduleState,
     onSwipeRight: () -> Unit,
-    onSwipeLeft: () -> Unit
+    onSwipeLeft: () -> Unit,
+    onClassClicked: (id: Int) -> Unit
 ) {
     when (state.listState) {
         is StudentScheduleListState.Content -> {
             StudentScheduleContentComponent(
                 state.listState.list.toImmutableList(),
                 onSwipeLeft,
-                onSwipeRight
+                onSwipeRight,
+                onClassClicked
             )
         }
 
         is StudentScheduleListState.Failure -> {
-            AlertDialog(
-                onDismissRequest = { },
-                confirmButton = { },
-                text = { Text(text = state.listState.message ?: "Unknown Error") }
-            )
+            ErrorDialog(modifier = Modifier, message = state.listState.message)
         }
 
         is StudentScheduleListState.Loading -> {
-            Box(modifier = Modifier.fillMaxSize()) {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center),
-                    color = colorResource(id = R.color.blue)
-                )
-            }
+            LoadingComponent(modifier = Modifier.fillMaxSize())
         }
     }
 }

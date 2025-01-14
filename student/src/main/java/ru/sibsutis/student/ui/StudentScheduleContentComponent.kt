@@ -50,12 +50,14 @@ import ru.sibsutis.student.data.model.Class
 fun StudentScheduleContentComponent(
     list: ImmutableList<Class>,
     onSwipeRight: () -> Unit,
-    onSwipeLeft: () -> Unit
+    onSwipeLeft: () -> Unit,
+    onClassClicked: (id: Int) -> Unit
 ) {
     var offset by remember { mutableFloatStateOf(0f) }
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
+            .padding(top = 20.dp)
             .pointerInput(Unit) {
                 detectHorizontalDragGestures(
                     onDragStart = { offset = 0f },
@@ -74,11 +76,11 @@ fun StudentScheduleContentComponent(
         items(list) {
             Column(
                 modifier = Modifier
-                    .padding(top = 20.dp)
+                    .padding(bottom = 20.dp)
                     .fillMaxWidth(0.9f)
                     .clip(RoundedCornerShape(10.dp))
                     .background(color = colorResource(id = R.color.background))
-                    .clickable { },
+                    .clickable { onClassClicked(it.id) },
             ) {
                 Row(
                     modifier = Modifier

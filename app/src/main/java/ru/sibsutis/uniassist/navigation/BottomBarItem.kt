@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 data class BottomBarItem(
     @StringRes val titleRes: Int,
-    val route: String,
+    val route: Route,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
     val badgeAmount: Int? = null
