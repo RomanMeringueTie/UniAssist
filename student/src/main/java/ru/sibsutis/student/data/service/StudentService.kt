@@ -1,10 +1,10 @@
 package ru.sibsutis.student.data.service
 
-import ru.sibsutis.core.network.KtorClient
-import ru.sibsutis.student.data.model.Class
 import kotlinx.coroutines.delay
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import ru.sibsutis.core.network.KtorClient
+import ru.sibsutis.student.data.model.ClassModel
 import ru.sibsutis.student.data.model.ClassType
 import ru.sibsutis.student.data.model.Task
 
@@ -17,10 +17,10 @@ class StudentService(private val ktorClient: KtorClient) {
 //        }.body()
 //        return response.classes
 //    }
-    suspend fun getSchedule(date: LocalDate): List<Class> {
+    suspend fun getSchedule(date: LocalDate): List<ClassModel> {
         delay(1000)
         return listOf(
-            Class(
+            ClassModel(
                 id = 0,
                 subject = "Схемотехника",
                 startTime = LocalTime(8, 0),
@@ -28,9 +28,9 @@ class StudentService(private val ktorClient: KtorClient) {
                 type = ClassType.LABORATORY,
                 teacher = "Иванов В. П.",
                 classroom = "1 - 201",
-                task = Task("Лабораторная № 3")
+                task = Task(0, "Лабораторная № 3", "Сложная лаба")
             ),
-            Class(
+            ClassModel(
                 id = 1,
                 subject = "Архитектура ЭВМ",
                 startTime = LocalTime(9, 50),
@@ -38,41 +38,42 @@ class StudentService(private val ktorClient: KtorClient) {
                 type = ClassType.LABORATORY,
                 teacher = "Сидоров С. А.",
                 classroom = "5 - 213",
-                task = Task("Лабораторная № 4")
+                task = Task(1, "Лабораторная № 4", "Ещё более сложная лаба")
+
             ),
-            Class(
+            ClassModel(
                 id = 2,
                 subject = "Экономика",
                 startTime = LocalTime(11, 40),
                 endTime = LocalTime(13, 15),
-                type = ClassType.LABORATORY,
+                type = ClassType.LECTURE,
                 teacher = "Калинина М. Л.",
                 classroom = "3 - 416",
             ),
-            Class(
+            ClassModel(
                 id = 3,
                 subject = "Философия",
                 startTime = LocalTime(13, 45),
                 endTime = LocalTime(15, 20),
-                type = ClassType.LABORATORY,
+                type = ClassType.PRACTICE,
                 teacher = "Калинина М. Л.",
                 classroom = "3 - 416",
             ),
-            Class(
+            ClassModel(
                 id = 4,
                 subject = "Русский язык",
                 startTime = LocalTime(15, 35),
                 endTime = LocalTime(17, 10),
-                type = ClassType.LABORATORY,
+                type = ClassType.LECTURE,
                 teacher = "Калинина М. Л.",
                 classroom = "3 - 416",
             ),
-            Class(
+            ClassModel(
                 id = 5,
                 subject = "Сети ЭВМ и Телекоммуникации",
                 startTime = LocalTime(17, 25),
                 endTime = LocalTime(19, 0),
-                type = ClassType.LABORATORY,
+                type = ClassType.LECTURE,
                 teacher = "Калинина М. Л.",
                 classroom = "3 - 416",
             )

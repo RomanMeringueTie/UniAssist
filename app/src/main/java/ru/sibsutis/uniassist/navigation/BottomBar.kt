@@ -28,28 +28,7 @@ internal const val PROFILE_ROUTE = "PROFILE"
 
 @Composable
 internal fun BottomBar(navController: NavController) {
-    val itemsList = remember {
-        listOf(
-            BottomBarItem(
-                titleRes = R.string.schedule,
-                route = SCHEDULE_ROUTE,
-                selectedIcon = Icons.Filled.DateRange,
-                unselectedIcon = Icons.Outlined.DateRange
-            ),
-            BottomBarItem(
-                titleRes = R.string.messages,
-                route = MESSAGES_ROUTE,
-                selectedIcon = Icons.Filled.Email,
-                unselectedIcon = Icons.Outlined.Email
-            ),
-            BottomBarItem(
-                titleRes = R.string.profile,
-                route = PROFILE_ROUTE,
-                selectedIcon = Icons.Filled.Person,
-                unselectedIcon = Icons.Outlined.Person
-            )
-        )
-    }
+    val itemsList = remember { BottomBarItem.entries }
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
     NavigationBar {
         itemsList.forEachIndexed { index, item ->
@@ -60,7 +39,7 @@ internal fun BottomBar(navController: NavController) {
                     navController.navigate(item.route)
                 },
                 icon = {
-                    BadgedBox(badge = { Badge() }) {
+                    BadgedBox(badge = { if (item.badgeAmount != null) Badge() }) {
                         Icon(
                             imageVector = if (selectedItem == index) {
                                 item.selectedIcon

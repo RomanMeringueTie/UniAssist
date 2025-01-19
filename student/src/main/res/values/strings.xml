@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Student</string>
     <string name="monday">ПН</string>
+    <string name="lecture">Лекция</string>
+    <string name="practice">Практика</string>
+    <string name="laboratory">Лабораторная</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
 </resources>

@@ -62,7 +62,7 @@ dependencies {
     // DateTime
     implementation(libs.kotlinx.datetime)
 
-
+    implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -7,11 +7,12 @@ import ru.sibsutis.student.data.repository.StudentRepository
 import ru.sibsutis.student.data.repository.StudentRepositoryImpl
 import ru.sibsutis.student.data.service.StudentService
 import ru.sibsutis.student.domain.GetStudentScheduleUseCase
+import ru.sibsutis.student.domain.GetStudentScheduleUseCaseImpl
 import ru.sibsutis.student.presentation.StudentScheduleViewModel
+import javax.inject.Singleton
 
 @Module
 class StudentModule {
-
     @Provides
     fun provideStudentService(ktorClient: KtorClient) = StudentService(ktorClient)
 
@@ -20,11 +21,10 @@ class StudentModule {
         StudentRepositoryImpl(studentService)
 
     @Provides
-    fun provideGetStudentScheduleUseCase(studentRepository: StudentRepository) =
-        GetStudentScheduleUseCase(studentRepository)
+    fun provideGetStudentScheduleUseCase(studentRepository: StudentRepository): GetStudentScheduleUseCase =
+        GetStudentScheduleUseCaseImpl(studentRepository)
 
     @Provides
     fun provideStudentScheduleViewModel(getStudentScheduleUseCase: GetStudentScheduleUseCase) =
         StudentScheduleViewModel(getStudentScheduleUseCase)
-
 }

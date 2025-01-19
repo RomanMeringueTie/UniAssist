@@ -31,6 +31,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+            val coreComponent = DaggerCoreComponent.builder().build()
+            val studentComponent =
+                DaggerStudentComponent.builder().coreComponent(coreComponent).build()
+            val studentScheduleViewModel =
+                daggerViewModel(key = "ScheduleViewModel") { studentComponent.getScheduleViewModel() }
             UniAssistTheme {
                 Scaffold(
                     modifier = Modifier
@@ -43,10 +48,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(it)
                     ) {
                         composable(SCHEDULE_ROUTE) {
-                            val component = DaggerStudentComponent.builder().build()
-                            val viewModel =
-                                daggerViewModel(key = "ScheduleViewModel") { component.getScheduleViewModel() }
-                            StudentScheduleScreen(viewModel)
+                            StudentScheduleScreen(studentScheduleViewModel)
                         }
                         composable(MESSAGES_ROUTE) {
                             Text(text = "Messages")

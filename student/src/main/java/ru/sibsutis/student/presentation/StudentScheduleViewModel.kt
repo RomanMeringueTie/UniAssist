@@ -1,5 +1,6 @@
 package ru.sibsutis.student.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +20,7 @@ class StudentScheduleViewModel(
     }
 
     fun changePickedDate(date: LocalDate) {
+        Log.e("CHANGE", "YEAHHHHH")
         _state.value = _state.value.copy(
             date = date,
             listState = StudentScheduleListState.Loading
@@ -35,11 +37,15 @@ class StudentScheduleViewModel(
             result.fold(
                 onSuccess = {
                     _state.value =
-                        _state.value.copy(listState = StudentScheduleListState.Content(result.getOrNull()!!))
+                        _state.value.copy(listState = StudentScheduleListState.Content(list = it))
                 },
                 onFailure = {
                     _state.value =
-                        _state.value.copy(listState = StudentScheduleListState.Failure(result.exceptionOrNull()?.message))
+                        _state.value.copy(
+                            listState = StudentScheduleListState.Failure(
+                                message = it.message ?: "Unknown Error"
+                            )
+                        )
                 }
             )
         }

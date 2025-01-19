@@ -9,5 +9,4 @@ import ru.sibsutis.uniassist.MainActivity
 
 @Component(modules = [CoreModule::class])
 interface AppComponent {
-    fun inject(mainActivity: MainActivity)
 }

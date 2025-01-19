@@ -1,17 +1,8 @@
 package ru.sibsutis.student.domain
 
-import android.util.Log
 import kotlinx.datetime.LocalDate
-import ru.sibsutis.student.data.model.Class
-import ru.sibsutis.student.data.repository.StudentRepository
+import ru.sibsutis.student.data.model.ClassModel
 
-class GetStudentScheduleUseCase(private val repository: StudentRepository) {
-    suspend operator fun invoke(date: LocalDate): Result<List<Class>> {
-        return try {
-            val list = repository.getSchedule(date)
-            Result.success(list)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
+interface GetStudentScheduleUseCase {
+    suspend operator fun invoke(date: LocalDate): Result<List<ClassModel>>
 }
