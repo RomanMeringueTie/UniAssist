@@ -15,10 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.sibsutis.student.R
+import ru.sibsutis.student.data.model.ClassType
 
 @Composable
 fun StudentScheduleClassItem(item: ClassUI) {
@@ -78,5 +80,14 @@ fun StudentScheduleClassItem(item: ClassUI) {
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun convertType(typeModel: ClassType): String {
+    return when (typeModel) {
+        ClassType.LECTURE -> stringResource(R.string.lecture)
+        ClassType.PRACTICE -> stringResource(R.string.practice)
+        ClassType.LABORATORY -> stringResource(R.string.laboratory)
     }
 }
