@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -9,7 +10,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,10 +24,19 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.13"
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -42,6 +52,7 @@ dependencies {
     // Jetpack Compose
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui.tooling.preview.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
