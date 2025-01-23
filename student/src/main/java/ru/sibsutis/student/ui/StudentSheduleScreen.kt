@@ -27,6 +27,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import kotlinx.datetime.todayIn
+import ru.sibsutis.core.ui.getWeekDay
 import ru.sibsutis.core.utils.CalendarUtil
 import ru.sibsutis.student.R
 import ru.sibsutis.student.presentation.StudentScheduleViewModel

@@ -8,12 +8,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-fun ErrorDialog(modifier: Modifier, message: String, onRetry: () -> Unit) {
+fun ErrorDialog(
+    modifier: Modifier,
+    message: String,
+    onDismissRequest: () -> Unit,
+    onRetry: () -> Unit
+) {
     AlertDialog(
         modifier = modifier,
-        onDismissRequest = { },
+        onDismissRequest = onDismissRequest,
         confirmButton = {
-            TextButton(onClick = { onRetry() }) {
+            TextButton(onClick = onRetry) {
                 Text(text = "OK")
             }
         },

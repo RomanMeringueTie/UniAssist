@@ -1,11 +1,13 @@
 package ru.sibsutis.student.ui
 
+import ru.sibsutis.student.data.model.ClassType
+
 data class ClassUI(
     val id: Int,
     val subject: String,
     val startTime: String,
     val endTime: String,
-    val type: String,
+    val type: ClassType,
     val teacher: String,
     val classroom: String,
     val taskHeader: String?

@@ -1,4 +1,4 @@
-package ru.sibsutis.student.ui
+package ru.sibsutis.core.ui
 
 import android.annotation.SuppressLint
 import kotlinx.datetime.LocalDate

@@ -9,7 +9,7 @@ import androidx.compose.ui.res.colorResource
 import ru.sibsutis.core.R
 
 @Composable
-fun LoadingComponent(modifier: Modifier) {
+fun LoadingIndicator(modifier: Modifier) {
     Box(modifier = modifier) {
         CircularProgressIndicator(
             modifier = Modifier.align(Alignment.Center),

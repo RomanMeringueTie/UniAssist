@@ -16,9 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import ru.sibsutis.core.di.DaggerCoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 import ru.sibsutis.student.di.DaggerStudentComponent
-import ru.sibsutis.student.presentation.StudentScheduleViewModel
 import ru.sibsutis.student.ui.StudentScheduleScreen
-import ru.sibsutis.uniassist.di.DaggerAppComponent
 import ru.sibsutis.uniassist.navigation.BottomBar
 import ru.sibsutis.uniassist.navigation.MESSAGES_ROUTE
 import ru.sibsutis.uniassist.navigation.PROFILE_ROUTE
@@ -26,16 +24,17 @@ import ru.sibsutis.uniassist.navigation.SCHEDULE_ROUTE
 import ru.sibsutis.uniassist.ui.theme.UniAssistTheme
 
 class MainActivity : ComponentActivity() {
+    private val coreComponent by lazy { DaggerCoreComponent.builder().build() }
+    private val studentComponent by lazy {
+        DaggerStudentComponent.builder().coreComponent(coreComponent).build()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            val coreComponent = DaggerCoreComponent.builder().build()
-            val studentComponent =
-                DaggerStudentComponent.builder().coreComponent(coreComponent).build()
-            val studentScheduleViewModel =
-                daggerViewModel(key = "ScheduleViewModel") { studentComponent.getScheduleViewModel() }
+
             UniAssistTheme {
                 Scaffold(
                     modifier = Modifier
@@ -48,6 +47,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(it)
                     ) {
                         composable(SCHEDULE_ROUTE) {
+                            val studentScheduleViewModel =
+                                daggerViewModel(key = "ScheduleViewModel") { studentComponent.getScheduleViewModel() }
                             StudentScheduleScreen(studentScheduleViewModel)
                         }
                         composable(MESSAGES_ROUTE) {
