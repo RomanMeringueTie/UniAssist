@@ -28,7 +28,8 @@ import ru.sibsutis.student.R
 fun StudentScheduleContent(
     list: ImmutableList<ClassUI>,
     onSwipeRight: () -> Unit,
-    onSwipeLeft: () -> Unit
+    onSwipeLeft: () -> Unit,
+    onItemClick: (Int) -> Unit
 ) {
     var offset by remember { mutableFloatStateOf(0f) }
     LazyColumn(
@@ -56,6 +57,7 @@ fun StudentScheduleContent(
                     .fillMaxWidth(0.9f)
                     .clip(RoundedCornerShape(10.dp))
                     .background(color = colorResource(id = R.color.background))
+                    .clickable { onItemClick(it.id) }
             ) {
                 StudentScheduleClassItem(item = it)
             }

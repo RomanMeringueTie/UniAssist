@@ -1,13 +1,13 @@
 package ru.sibsutis.student.presentation
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.sibsutis.student.domain.GetStudentClassUseCase
+import ru.sibsutis.student.domain.GetStudentClassUseCaseImpl
+import ru.sibsutis.student.ui.ClassConverter
 
 class StudentClassViewModel(
     private val getStudentClassUseCase: GetStudentClassUseCase
@@ -24,7 +24,10 @@ class StudentClassViewModel(
         viewModelScope.launch {
             val result = getStudentClassUseCase(id)
             result.fold(
-                onSuccess = { _state.value = StudentClassState.Content(classItem = it) },
+                onSuccess = {
+                    _state.value =
+                        StudentClassState.Content(classItem = ClassConverter().convertItem(it))
+                },
                 onFailure = { _state.value = StudentClassState.Failure(message = it.message) }
             )
         }

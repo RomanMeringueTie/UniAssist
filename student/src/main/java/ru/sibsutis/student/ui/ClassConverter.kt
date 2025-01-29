@@ -10,7 +10,7 @@ class ClassConverter {
         }
     }
 
-    private fun convertItem(classModel: ClassModel): ClassUI {
+    fun convertItem(classModel: ClassModel): ClassUI {
         return ClassUI(
             id = classModel.id,
             subject = classModel.subject,

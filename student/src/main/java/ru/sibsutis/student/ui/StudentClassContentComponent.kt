@@ -16,7 +16,6 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Text
-import ru.sibsutis.student.data.model.Class
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,7 +29,7 @@ import androidx.compose.ui.unit.sp
 import ru.sibsutis.student.R
 
 @Composable
-fun StudentClassContentComponent(classItem: Class) {
+fun StudentClassContentComponent(classItem: ClassUI) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -85,7 +84,7 @@ fun StudentClassContentComponent(classItem: Class) {
         ) {
             val textModifier =
                 Modifier.padding(bottom = 10.dp, start = 5.dp, top = 10.dp, end = 5.dp)
-            if (classItem.task == null) {
+            if (classItem.taskHeader == null) {
                 Text(
                     modifier = textModifier,
                     text = "Преподаватель ${classItem.teacher} не выложил задание на это занятие",
@@ -105,7 +104,7 @@ fun StudentClassContentComponent(classItem: Class) {
                 )
                 Text(
                     modifier = textModifier,
-                    text = classItem.task.header,
+                    text = classItem.taskHeader,
                     textAlign = TextAlign.Start,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.ExtraBold,
@@ -121,9 +120,9 @@ fun StudentClassContentComponent(classItem: Class) {
                 )
             }
         }
-        if (classItem.task != null)
+        if (classItem.taskHeader != null)
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { },
                 colors = ButtonColors(
                     containerColor = colorResource(id = R.color.blue),
                     contentColor = ButtonDefaults.buttonColors().contentColor,

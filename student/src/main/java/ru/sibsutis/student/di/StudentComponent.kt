@@ -16,6 +16,5 @@ interface StudentComponent {
     }
 
     fun getScheduleViewModel(): StudentScheduleViewModel
-
     fun getClassViewModel(): StudentClassViewModel
 }
