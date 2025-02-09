@@ -6,29 +6,40 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.sibsutis.student.domain.GetStudentClassUseCase
-import ru.sibsutis.student.domain.GetStudentClassUseCaseImpl
 import ru.sibsutis.student.ui.ClassConverter
+import ru.sibsutis.student.ui.ClassUI
 
 class StudentClassViewModel(
-    private val getStudentClassUseCase: GetStudentClassUseCase
+    private val classConverter: ClassConverter,
+    private val getStudentClassUseCase: GetStudentClassUseCase,
+    private val id: Int
 ) :
     ViewModel() {
 
-    private val _state: MutableStateFlow<StudentClassState> =
-        MutableStateFlow(StudentClassState.Loading)
-    val state: StateFlow<StudentClassState> = _state
+    private val _state: MutableStateFlow<State<ClassUI>> =
+        MutableStateFlow(State.Loading())
+    val state: StateFlow<State<ClassUI>> = _state
 
-    fun loadClass(id: Int) {
-        if (_state.value !is StudentClassState.Loading)
+
+    init {
+        loadClass(id)
+    }
+
+
+    private fun loadClass(id: Int) {
+        if (_state.value !is State.Loading)
             return
         viewModelScope.launch {
             val result = getStudentClassUseCase(id)
             result.fold(
                 onSuccess = {
                     _state.value =
-                        StudentClassState.Content(classItem = ClassConverter().convertItem(it))
+                        State.Content(content = classConverter.convertItem(it))
                 },
-                onFailure = { _state.value = StudentClassState.Failure(message = it.message) }
+                onFailure = {
+                    _state.value =
+                        State.Failure(message = it.message ?: "Unknown Error")
+                }
             )
         }
     }

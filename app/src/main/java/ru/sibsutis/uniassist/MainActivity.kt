@@ -17,6 +17,7 @@ import androidx.navigation.toRoute
 import ru.sibsutis.core.di.DaggerCoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 import ru.sibsutis.student.di.DaggerStudentComponent
+import ru.sibsutis.student.presentation.StudentClassViewModel
 import ru.sibsutis.student.ui.StudentClassScreen
 import ru.sibsutis.student.ui.StudentScheduleScreen
 import ru.sibsutis.uniassist.navigation.BottomBar
@@ -24,6 +25,7 @@ import ru.sibsutis.uniassist.navigation.Route
 import ru.sibsutis.uniassist.ui.theme.UniAssistTheme
 
 class MainActivity : ComponentActivity() {
+
     private val coreComponent by lazy { DaggerCoreComponent.builder().build() }
     private val studentComponent by lazy {
         DaggerStudentComponent.builder().coreComponent(coreComponent).build()
@@ -65,12 +67,20 @@ class MainActivity : ComponentActivity() {
                             Text(text = "Profile")
                         }
                         composable<Route.ClassRoute> { backStackEntry ->
-                            val viewModel =
-                                daggerViewModel(key = "ClassViewModel") { studentComponent.getClassViewModel() }
+                            val getStudentClassUseCase =
+                                studentComponent.getGetStudentClassUseCase()
+                            val classConverter = studentComponent.getClassConverter()
                             val id = backStackEntry.toRoute<Route.ClassRoute>().id
+                            val viewModel: StudentClassViewModel =
+                                daggerViewModel(key = "StudentClassViewModel-$id") {
+                                    StudentClassViewModel(
+                                        classConverter,
+                                        getStudentClassUseCase,
+                                        id
+                                    )
+                                }
                             StudentClassScreen(
-                                viewModel = viewModel,
-                                id = id
+                                viewModel = viewModel
                             )
                         }
                     }

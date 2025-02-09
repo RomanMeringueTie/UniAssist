@@ -10,9 +10,8 @@ import ru.sibsutis.student.domain.GetStudentClassUseCase
 import ru.sibsutis.student.domain.GetStudentClassUseCaseImpl
 import ru.sibsutis.student.domain.GetStudentScheduleUseCase
 import ru.sibsutis.student.domain.GetStudentScheduleUseCaseImpl
-import ru.sibsutis.student.presentation.StudentClassViewModel
 import ru.sibsutis.student.presentation.StudentScheduleViewModel
-import javax.inject.Singleton
+import ru.sibsutis.student.ui.ClassConverter
 
 @Module
 class StudentModule {
@@ -28,14 +27,17 @@ class StudentModule {
         GetStudentScheduleUseCaseImpl(studentRepository)
 
     @Provides
-    fun provideStudentScheduleViewModel(getStudentScheduleUseCase: GetStudentScheduleUseCase) =
-        StudentScheduleViewModel(getStudentScheduleUseCase)
+    fun provideClassConverter() = ClassConverter()
+
+    @Provides
+    fun provideStudentScheduleViewModel(
+        classConverter: ClassConverter,
+        getStudentScheduleUseCase: GetStudentScheduleUseCase
+    ) =
+        StudentScheduleViewModel(classConverter, getStudentScheduleUseCase)
 
     @Provides
     fun provideGetStudentClassUseCase(studentRepository: StudentRepository): GetStudentClassUseCase =
         GetStudentClassUseCaseImpl(studentRepository)
 
-    @Provides
-    fun provideStudentClassViewModel(getStudentClassUseCase: GetStudentClassUseCase) =
-        StudentClassViewModel(getStudentClassUseCase)
 }

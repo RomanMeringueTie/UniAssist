@@ -25,7 +25,7 @@ import kotlinx.collections.immutable.ImmutableList
 import ru.sibsutis.student.R
 
 @Composable
-fun StudentScheduleContent(
+internal fun StudentScheduleContent(
     list: ImmutableList<ClassUI>,
     onSwipeRight: () -> Unit,
     onSwipeLeft: () -> Unit,
@@ -35,6 +35,7 @@ fun StudentScheduleContent(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
+            .padding(bottom = 20.dp)
             .pointerInput(Unit) {
                 detectHorizontalDragGestures(
                     onDragStart = { offset = 0f },

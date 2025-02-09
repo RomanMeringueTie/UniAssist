@@ -10,6 +10,7 @@ import ru.sibsutis.student.domain.GetStudentScheduleUseCase
 import ru.sibsutis.student.ui.ClassConverter
 
 class StudentScheduleViewModel(
+    private val classConverter: ClassConverter,
     private val getStudentScheduleUseCase: GetStudentScheduleUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(StudentScheduleState())
@@ -22,13 +23,13 @@ class StudentScheduleViewModel(
     fun changePickedDate(date: LocalDate) {
         _state.value = _state.value.copy(
             date = date,
-            listState = StudentScheduleListState.Loading
+            listState = State.Loading()
         )
         loadSchedule()
     }
 
     private fun loadSchedule() {
-        if (_state.value.listState !is StudentScheduleListState.Loading) {
+        if (_state.value.listState !is State.Loading) {
             return
         }
         viewModelScope.launch {
@@ -37,15 +38,15 @@ class StudentScheduleViewModel(
                 onSuccess = {
                     _state.value =
                         _state.value.copy(
-                            listState = StudentScheduleListState.Content(
-                                list = ClassConverter().convertList(it)
+                            listState = State.Content(
+                                content = classConverter.convertList(it)
                             )
                         )
                 },
                 onFailure = {
                     _state.value =
                         _state.value.copy(
-                            listState = StudentScheduleListState.Failure(
+                            listState = State.Failure(
                                 message = it.message ?: "Unknown Error"
                             )
                         )

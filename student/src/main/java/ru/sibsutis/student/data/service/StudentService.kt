@@ -79,6 +79,8 @@ class StudentService(private val ktorClient: KtorClient) {
     suspend fun getSchedule(date: LocalDate): List<ClassModel> {
         delay(1000)
         return list
+
+//        return ktorClient.client.get("student_schedule/${date.toEpochDays()}").body()
     }
 
     suspend fun getClass(id: Int): ClassModel {

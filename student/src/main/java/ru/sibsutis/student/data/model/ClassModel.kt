@@ -1,7 +1,9 @@
 package ru.sibsutis.student.data.model
 
 import kotlinx.datetime.LocalTime
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ClassModel(
     val id: Int,
     val subject: String,

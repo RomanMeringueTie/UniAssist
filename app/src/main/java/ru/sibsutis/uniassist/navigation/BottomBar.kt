@@ -1,12 +1,5 @@
 package ru.sibsutis.uniassist.navigation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.outlined.DateRange
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
@@ -22,7 +15,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import ru.sibsutis.uniassist.R
 
 @Composable
 internal fun BottomBar(navController: NavController) {

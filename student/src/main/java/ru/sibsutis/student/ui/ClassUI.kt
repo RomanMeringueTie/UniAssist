@@ -10,5 +10,16 @@ data class ClassUI(
     val type: ClassType,
     val teacher: String,
     val classroom: String,
-    val taskHeader: String?
+    val task: TaskUI?,
+)
+
+data class TaskUI(
+    val header: String,
+    val body: String,
+    val responses: List<ResponseUI>?
+)
+
+data class ResponseUI(
+    val body: String,
+    val mark: Int?
 )
