@@ -17,6 +17,8 @@ import ru.sibsutis.core.di.DaggerCoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 import ru.sibsutis.student.di.DaggerStudentComponent
 import ru.sibsutis.student.ui.StudentScheduleScreen
+import ru.sibsutis.teacher.di.DaggerTeacherComponent
+import ru.sibsutis.teacher.ui.TeacherScheduleScreen
 import ru.sibsutis.uniassist.navigation.BottomBar
 import ru.sibsutis.uniassist.navigation.MESSAGES_ROUTE
 import ru.sibsutis.uniassist.navigation.PROFILE_ROUTE
@@ -25,8 +27,11 @@ import ru.sibsutis.uniassist.ui.theme.UniAssistTheme
 
 class MainActivity : ComponentActivity() {
     private val coreComponent by lazy { DaggerCoreComponent.builder().build() }
-    private val studentComponent by lazy {
-        DaggerStudentComponent.builder().coreComponent(coreComponent).build()
+//    private val studentComponent by lazy {
+//        DaggerStudentComponent.builder().coreComponent(coreComponent).build()
+//    }
+    private val teacherComponent by lazy {
+        DaggerTeacherComponent.builder().coreComponent(coreComponent).build()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +39,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+
 
             UniAssistTheme {
                 Scaffold(
@@ -47,9 +53,9 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(it)
                     ) {
                         composable(SCHEDULE_ROUTE) {
-                            val studentScheduleViewModel =
-                                daggerViewModel(key = "ScheduleViewModel") { studentComponent.getScheduleViewModel() }
-                            StudentScheduleScreen(studentScheduleViewModel)
+                            val teacherScheduleViewModel =
+                                daggerViewModel(key = "ScheduleViewModel") { teacherComponent.getScheduleViewModel() }
+                            TeacherScheduleScreen(teacherScheduleViewModel)
                         }
                         composable(MESSAGES_ROUTE) {
                             Text(text = "Messages")
@@ -60,6 +66,31 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+//            UniAssistTheme {
+//                Scaffold(
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                        .safeDrawingPadding(),
+//                    bottomBar = { BottomBar(navController = navController) }) {
+//                    NavHost(
+//                        navController = navController,
+//                        startDestination = SCHEDULE_ROUTE,
+//                        modifier = Modifier.padding(it)
+//                    ) {
+//                        composable(SCHEDULE_ROUTE) {
+//                            val studentScheduleViewModel =
+//                                daggerViewModel(key = "ScheduleViewModel") { studentComponent.getScheduleViewModel() }
+//                            StudentScheduleScreen(studentScheduleViewModel)
+//                        }
+//                        composable(MESSAGES_ROUTE) {
+//                            Text(text = "Messages")
+//                        }
+//                        composable(PROFILE_ROUTE) {
+//                            Text(text = "Profile")
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 }

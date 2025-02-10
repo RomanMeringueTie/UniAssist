@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sibsutis.student"
+    namespace = "ru.sibsutis.teacher"
     compileSdk = 35
 
     defaultConfig {
@@ -45,8 +45,14 @@ android {
 dependencies {
     implementation(project(":core"))
 
+    // Immutable Collections
+    implementation(libs.jetbrains.kotlinx.collections.immutable)
+
 // Dagger 2
     implementation(libs.dagger)
+    implementation(libs.androidx.foundation.android)
+    implementation(libs.foundation.android)
+    implementation(libs.androidx.material3.android)
     kapt(libs.dagger.compiler)
 
     // Jetpack Compose
@@ -54,6 +60,10 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.tooling.preview.android)
 
+    // Date Time
+    implementation(libs.kotlinx.datetime)
+
+    implementation(libs.androidx.material3)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
