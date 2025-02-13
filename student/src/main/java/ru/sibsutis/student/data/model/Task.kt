@@ -1,11 +1,17 @@
 package ru.sibsutis.student.data.model
 
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Task(
+    @SerialName("id")
     val id: Int,
+    @SerialName("header")
     val header: String,
+    @SerialName("body")
     val body: String,
-    val responses: List<Response>? = null
+    @SerialName("responses")
+    val responses: ImmutableList<Response>? = null
 )

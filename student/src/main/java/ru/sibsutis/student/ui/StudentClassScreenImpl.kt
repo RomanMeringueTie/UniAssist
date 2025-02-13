@@ -23,8 +23,9 @@ internal fun StudentClassScreenImpl(state: State<ClassUI>) {
                 onRetry = {})
         }
 
-        is State.Loading -> {
+        State.Loading -> {
             LoadingIndicator(modifier = Modifier.fillMaxSize())
         }
+
     }
 }

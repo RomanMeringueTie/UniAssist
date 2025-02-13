@@ -17,7 +17,7 @@ class StudentClassViewModel(
     ViewModel() {
 
     private val _state: MutableStateFlow<State<ClassUI>> =
-        MutableStateFlow(State.Loading())
+        MutableStateFlow(State.Loading)
     val state: StateFlow<State<ClassUI>> = _state
 
 
@@ -27,7 +27,7 @@ class StudentClassViewModel(
 
 
     private fun loadClass(id: Int) {
-        if (_state.value !is State.Loading)
+        if (_state.value != State.Loading)
             return
         viewModelScope.launch {
             val result = getStudentClassUseCase(id)

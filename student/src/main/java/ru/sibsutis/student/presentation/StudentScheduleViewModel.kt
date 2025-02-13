@@ -23,7 +23,7 @@ class StudentScheduleViewModel(
     fun changePickedDate(date: LocalDate) {
         _state.value = _state.value.copy(
             date = date,
-            listState = State.Loading()
+            listState = State.Loading
         )
         loadSchedule()
     }

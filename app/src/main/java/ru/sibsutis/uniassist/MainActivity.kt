@@ -71,6 +71,7 @@ class MainActivity : ComponentActivity() {
                                 studentComponent.getGetStudentClassUseCase()
                             val classConverter = studentComponent.getClassConverter()
                             val id = backStackEntry.toRoute<Route.ClassRoute>().id
+                                // TODO("Заменить на фабрику viewModel")
                             val viewModel: StudentClassViewModel =
                                 daggerViewModel(key = "StudentClassViewModel-$id") {
                                     StudentClassViewModel(
