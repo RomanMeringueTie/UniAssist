@@ -6,33 +6,35 @@ import androidx.compose.ui.Modifier
 import kotlinx.collections.immutable.toImmutableList
 import ru.sibsutis.core.ui.ErrorDialog
 import ru.sibsutis.core.ui.LoadingIndicator
-import ru.sibsutis.student.presentation.StudentScheduleListState
+import ru.sibsutis.student.presentation.State
 import ru.sibsutis.student.presentation.StudentScheduleState
 
 
 @Composable
-fun StudentScheduleScreenImpl(
+internal fun StudentScheduleScreenImpl(
     state: StudentScheduleState,
     onSwipeRight: () -> Unit,
     onSwipeLeft: () -> Unit,
-    onRetry: () -> Unit
+    onRetry: () -> Unit,
+    onItemClick: (Int) -> Unit
 ) {
     when (state.listState) {
-        is StudentScheduleListState.Content -> {
+        is State.Content -> {
             StudentScheduleContent(
-                list = state.listState.list.toImmutableList(),
+                list = state.listState.content.toImmutableList(),
                 onSwipeLeft = onSwipeLeft,
-                onSwipeRight = onSwipeRight
+                onSwipeRight = onSwipeRight,
+                onItemClick = onItemClick
             )
         }
 
-        is StudentScheduleListState.Failure -> ErrorDialog(
+        is State.Failure -> ErrorDialog(
             modifier = Modifier,
             message = state.listState.message,
             onDismissRequest = { },
             onRetry = onRetry
         )
 
-        is StudentScheduleListState.Loading -> LoadingIndicator(modifier = Modifier.fillMaxSize())
+        is State.Loading -> LoadingIndicator(modifier = Modifier.fillMaxSize())
     }
 }

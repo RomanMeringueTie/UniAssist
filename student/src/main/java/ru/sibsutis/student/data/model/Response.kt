@@ -1,8 +1,16 @@
 package ru.sibsutis.student.data.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Response(
+    @SerialName("id")
     val id: Int,
-    val student_id: Int,
+    @SerialName("student_id")
+    val studentId: Int,
+    @SerialName("body")
     val body: String,
-    val mark: Int
+    @SerialName("mark")
+    val mark: Int?
 )
