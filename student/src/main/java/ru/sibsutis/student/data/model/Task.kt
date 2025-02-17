@@ -13,5 +13,5 @@ data class Task(
     @SerialName("body")
     val body: String,
     @SerialName("responses")
-    val responses: ImmutableList<Response>? = null
+    val responses: List<Response>? = null
 )
