@@ -11,7 +11,7 @@ import ru.sibsutis.teacher.domain.GetTeacherScheduleUseCaseImpl
 import ru.sibsutis.teacher.presentation.TeacherScheduleViewModel
 
 @Module
-class TeacherModule {
+internal class TeacherModule {
     @Provides
     fun provideTeacherService(ktorClient: KtorClient) = TeacherService(ktorClient)
 

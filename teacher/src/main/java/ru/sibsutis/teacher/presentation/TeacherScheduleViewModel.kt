@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
+import ru.sibsutis.core.presentation.State
 import ru.sibsutis.teacher.domain.GetTeacherScheduleUseCase
 import ru.sibsutis.teacher.ui.ClassConverter
 
@@ -22,13 +23,13 @@ class TeacherScheduleViewModel(
     fun changePickedDate(date: LocalDate) {
         _state.value = _state.value.copy(
             date = date,
-            listState = TeacherScheduleListState.Loading
+            listState = State.Loading
         )
         loadSchedule()
     }
 
     private fun loadSchedule() {
-        if (_state.value.listState !is TeacherScheduleListState.Loading) {
+        if (_state.value.listState !is State.Loading) {
             return
         }
         viewModelScope.launch {
@@ -36,14 +37,14 @@ class TeacherScheduleViewModel(
             result.fold(
                 onSuccess = {
                     _state.value = _state.value.copy(
-                        listState = TeacherScheduleListState.Content(
-                            list = ClassConverter().convertList(it)
+                        listState = State.Content(
+                            content = ClassConverter().convertList(it)
                         )
                     )
                 },
                 onFailure = {
                     _state.value = _state.value.copy(
-                        listState = TeacherScheduleListState.Failure(
+                        listState = State.Failure(
                             message = it.message ?: "Unknown Error"
                         )
                     )

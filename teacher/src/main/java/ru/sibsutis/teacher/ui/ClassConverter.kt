@@ -5,7 +5,7 @@ import ru.sibsutis.teacher.data.model.ClassModel
 class ClassConverter {
 
     fun convertList(classModelList: List<ClassModel>) : List<ClassUI> {
-        return classModelList.map{
+        return classModelList.map {
             convertItem(it)
         }
     }
