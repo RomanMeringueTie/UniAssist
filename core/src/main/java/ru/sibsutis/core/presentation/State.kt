@@ -1,4 +1,4 @@
-package ru.sibsutis.student.presentation
+package ru.sibsutis.core.presentation
 
 sealed interface State<out T> {
     data object Loading : State<Nothing>

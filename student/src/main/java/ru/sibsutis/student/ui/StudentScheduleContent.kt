@@ -4,8 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -35,15 +38,14 @@ internal fun StudentScheduleContent(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = 20.dp)
             .pointerInput(Unit) {
                 detectHorizontalDragGestures(
                     onDragStart = { offset = 0f },
                     onDragEnd = {
                         if (offset < -300) {
-                            onSwipeLeft()
-                        } else if (offset > 300)
                             onSwipeRight()
+                        } else if (offset > 300)
+                            onSwipeLeft()
                     }
                 ) { _, dragAmount ->
                     offset += dragAmount
@@ -51,10 +53,13 @@ internal fun StudentScheduleContent(
             },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        item {
+            Spacer(modifier = Modifier.padding(top = 10.dp))
+        }
         items(list) {
             Box(
                 modifier = Modifier
-                    .padding(top = 20.dp)
+                    .padding(bottom = 10.dp, top = 10.dp)
                     .fillMaxWidth(0.9f)
                     .clip(RoundedCornerShape(10.dp))
                     .background(color = colorResource(id = R.color.background))
@@ -62,6 +67,9 @@ internal fun StudentScheduleContent(
             ) {
                 StudentScheduleClassItem(item = it)
             }
+        }
+        item {
+            Spacer(modifier = Modifier.padding(bottom = 10.dp))
         }
     }
 }
