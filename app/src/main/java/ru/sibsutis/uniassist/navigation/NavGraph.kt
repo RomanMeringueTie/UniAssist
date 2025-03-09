@@ -1,4 +1,4 @@
-package ru.sibsutis.uniassist.ui
+package ru.sibsutis.uniassist.navigation
 
 import android.app.Application
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,7 +11,6 @@ import ru.sibsutis.authorization.data.model.Role
 import ru.sibsutis.authorization.data.model.UserData
 import ru.sibsutis.authorization.di.AuthorizationComponent
 import ru.sibsutis.student.di.StudentComponent
-import ru.sibsutis.uniassist.navigation.Route
 
 @Composable
 fun NavGraph(

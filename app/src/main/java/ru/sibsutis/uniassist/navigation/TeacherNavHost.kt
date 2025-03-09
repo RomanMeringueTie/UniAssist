@@ -1,4 +1,4 @@
-package ru.sibsutis.uniassist.ui
+package ru.sibsutis.uniassist.navigation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,7 +12,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.sibsutis.authorization.data.model.UserData
-import ru.sibsutis.uniassist.navigation.Route
 
 @Composable
 fun TeacherNavHost(

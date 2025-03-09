@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import ru.sibsutis.authorization.di.AuthorizationComponent
 import ru.sibsutis.student.di.StudentComponent
 import ru.sibsutis.uniassist.navigation.BottomBar
+import ru.sibsutis.uniassist.navigation.NavGraph
 import ru.sibsutis.uniassist.navigation.Route
 import ru.sibsutis.uniassist.presentation.MainActivityViewModel
 

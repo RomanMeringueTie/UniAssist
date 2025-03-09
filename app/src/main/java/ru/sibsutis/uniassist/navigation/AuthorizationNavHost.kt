@@ -1,4 +1,4 @@
-package ru.sibsutis.uniassist.ui
+package ru.sibsutis.uniassist.navigation
 
 import android.app.Application
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,7 +18,6 @@ import ru.sibsutis.authorization.presentation.BackgroundAuthorizationViewModel
 import ru.sibsutis.authorization.ui.AuthorizationScreen
 import ru.sibsutis.authorization.ui.BackgroundAuthorizationScreen
 import ru.sibsutis.core.utils.daggerViewModel
-import ru.sibsutis.uniassist.navigation.Route
 
 
 @Composable
