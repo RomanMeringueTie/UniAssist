@@ -15,6 +15,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ru.sibsutis.core.di.DaggerCoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
+import ru.sibsutis.student.di.DaggerStudentComponent
+import ru.sibsutis.student.ui.StudentScheduleScreen
 import ru.sibsutis.teacher.di.DaggerTeacherComponent
 import ru.sibsutis.teacher.ui.TeacherScheduleScreen
 import ru.sibsutis.uniassist.navigation.BottomBar
@@ -25,6 +27,9 @@ import ru.sibsutis.uniassist.ui.theme.UniAssistTheme
 
 class MainActivity : ComponentActivity() {
     private val coreComponent by lazy { DaggerCoreComponent.builder().build() }
+    private val studentComponent by lazy {
+        DaggerStudentComponent.builder().coreComponent(coreComponent).build()
+    }
     private val teacherComponent by lazy {
         DaggerTeacherComponent.builder().coreComponent(coreComponent).build()
     }
@@ -35,6 +40,31 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
+            UniAssistTheme {
+                Scaffold(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .safeDrawingPadding(),
+                    bottomBar = { BottomBar(navController = navController) }) {
+                    NavHost(
+                        navController = navController,
+                        startDestination = SCHEDULE_ROUTE,
+                        modifier = Modifier.padding(it)
+                    ) {
+                        composable(SCHEDULE_ROUTE) {
+                            val studentScheduleViewModel =
+                                daggerViewModel(key = "ScheduleViewModel") { studentComponent.getScheduleViewModel() }
+                            StudentScheduleScreen(studentScheduleViewModel)
+                        }
+                        composable(MESSAGES_ROUTE) {
+                            Text(text = "Messages")
+                        }
+                        composable(PROFILE_ROUTE) {
+                            Text(text = "Profile")
+                        }
+                    }
+                }
+            }
 
             UniAssistTheme {
                 Scaffold(
@@ -61,6 +91,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+
         }
     }
 }
