@@ -53,20 +53,15 @@ fun AuthorizationNavHost(
                 }
             )
         }
-        composable<Route.BackgroundAuthorizationRoute> { backStackEntry ->
+        composable<Route.BackgroundAuthorizationRoute> {
             val getTokenUseCase =
                 authorizationComponent.getTokenUseCase()
-            val login =
-                backStackEntry.toRoute<Route.BackgroundAuthorizationRoute>().login
-            val password =
-                backStackEntry.toRoute<Route.BackgroundAuthorizationRoute>().password
             // TODO("Заменить на фабрику viewModel")
             val viewModel =
                 daggerViewModel(key = "BackgroundAuthorizationViewModel") {
                     BackgroundAuthorizationViewModel(
                         getTokenUseCase = getTokenUseCase,
-                        login = login,
-                        password = password
+                        application = application
                     )
                 }
             BackgroundAuthorizationScreen(

@@ -18,7 +18,7 @@ class MainActivityViewModel(application: Application) :
 
     init {
         login = SecureSharedPrefs.decryptData("login", application)
-        password = SecureSharedPrefs.decryptData("login", application)
+        password = SecureSharedPrefs.decryptData("password", application)
         if (login != null && password != null) {
             _isAuthorized.value = true
         }
