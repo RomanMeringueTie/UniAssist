@@ -9,8 +9,6 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
-import java.net.InetSocketAddress
-import java.net.Proxy
 
 class KtorClient {
 
@@ -27,7 +25,8 @@ class KtorClient {
             socketTimeout = 100_000
         }
         defaultRequest {
-            url("https://example.com/")
+            url("http://api.com/")
         }
+
     }
 }

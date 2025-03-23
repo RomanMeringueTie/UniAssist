@@ -1,4 +1,4 @@
-package ru.sibsutis.student
+package ru.sibsutis.teacher
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
