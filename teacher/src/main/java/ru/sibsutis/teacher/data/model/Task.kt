@@ -1,8 +1,16 @@
 package ru.sibsutis.teacher.data.model
 
-data class Task (
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Task(
+    @SerialName("id")
     val id: Int,
+    @SerialName("header")
     val header: String,
+    @SerialName("body")
     val body: String,
+    @SerialName("responses")
     val responses: List<Response>? = null
 )

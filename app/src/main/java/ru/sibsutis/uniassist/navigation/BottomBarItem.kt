@@ -13,26 +13,26 @@ import ru.sibsutis.uniassist.R
 
 enum class BottomBarItem(
     @StringRes val titleRes: Int,
-    val route: String,
+    val route: Route,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
     val badgeAmount: Int? = null
 ) {
     Schedule(
         titleRes = R.string.schedule,
-        route = SCHEDULE_ROUTE,
+        route = Route.ScheduleRoute,
         selectedIcon = Icons.Filled.DateRange,
         unselectedIcon = Icons.Outlined.DateRange
     ),
     Messages(
         titleRes = R.string.messages,
-        route = MESSAGES_ROUTE,
+        route = Route.MessageRoute,
         selectedIcon = Icons.Filled.Email,
         unselectedIcon = Icons.Outlined.Email
     ),
     Profile(
         titleRes = R.string.profile,
-        route = PROFILE_ROUTE,
+        route = Route.ProfileRoute,
         selectedIcon = Icons.Filled.Person,
         unselectedIcon = Icons.Outlined.Person
     )
