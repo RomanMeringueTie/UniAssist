@@ -9,6 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import ru.sibsutis.authorization.presentation.BackgroundAuthorizationViewModel
 import ru.sibsutis.core.presentation.State
 import ru.sibsutis.core.ui.LoadingIndicator
+import ru.sibsutis.core.ui.StableWrapper
 
 @Composable
 fun BackgroundAuthorizationScreen(
@@ -17,6 +18,8 @@ fun BackgroundAuthorizationScreen(
     onFailure: () -> Unit
 ) {
     val state = viewModel.state.collectAsState()
+    val contextWrapper = StableWrapper(LocalContext.current)
+
     when (state.value) {
 
         is State.Content -> {
@@ -25,7 +28,7 @@ fun BackgroundAuthorizationScreen(
 
         is State.Failure -> {
             Toast.makeText(
-                LocalContext.current,
+                contextWrapper.value,
                 (state.value as State.Failure<Any>).message,
                 Toast.LENGTH_LONG
             ).show()
