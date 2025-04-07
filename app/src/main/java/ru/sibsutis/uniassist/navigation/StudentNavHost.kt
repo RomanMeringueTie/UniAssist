@@ -1,9 +1,7 @@
 package ru.sibsutis.uniassist.navigation
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -13,8 +11,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import ru.sibsutis.authorization.data.model.UserData
+import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
-import ru.sibsutis.student.di.StudentComponent
+import ru.sibsutis.student.di.DaggerStudentComponent
 import ru.sibsutis.student.presentation.StudentClassViewModel
 import ru.sibsutis.student.ui.StudentClassScreen
 import ru.sibsutis.student.ui.StudentScheduleScreen
@@ -22,14 +21,18 @@ import ru.sibsutis.student.ui.StudentScheduleScreen
 @Composable
 fun StudentNavHost(
     navController: NavHostController,
-    studentComponent: StudentComponent,
+    coreComponent: CoreComponent,
     isBottomBarShown: MutableState<Boolean>,
-    paddingValues: PaddingValues,
+    modifier: Modifier,
 ) {
+    val studentComponent by lazy {
+        DaggerStudentComponent.builder().coreComponent(coreComponent).build()
+    }
+
     NavHost(
         navController = navController,
         startDestination = Route.ScheduleRoute,
-        modifier = Modifier.padding(paddingValues)
+        modifier = modifier
     ) {
         composable<Route.ScheduleRoute> {
             val viewModel =

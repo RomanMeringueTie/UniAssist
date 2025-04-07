@@ -1,9 +1,7 @@
 package ru.sibsutis.uniassist.navigation
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -17,12 +15,12 @@ import ru.sibsutis.authorization.data.model.UserData
 fun TeacherNavHost(
     navController: NavHostController,
     isBottomBarShown: MutableState<Boolean>,
-    paddingValues: PaddingValues,
+    modifier: Modifier,
 ) {
     NavHost(
         navController = navController,
         startDestination = Route.ScheduleRoute,
-        modifier = Modifier.padding(paddingValues)
+        modifier = modifier
     ) {
         composable<Route.ScheduleRoute> {
             Text("Schedule")

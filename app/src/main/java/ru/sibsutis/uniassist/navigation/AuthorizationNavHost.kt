@@ -1,22 +1,20 @@
 package ru.sibsutis.uniassist.navigation
 
 import android.app.Application
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.toRoute
 import ru.sibsutis.authorization.data.model.Role
 import ru.sibsutis.authorization.data.model.UserData
-import ru.sibsutis.authorization.di.AuthorizationComponent
+import ru.sibsutis.authorization.di.DaggerAuthorizationComponent
 import ru.sibsutis.authorization.presentation.AuthorizationViewModel
 import ru.sibsutis.authorization.presentation.BackgroundAuthorizationViewModel
 import ru.sibsutis.authorization.ui.AuthorizationScreen
 import ru.sibsutis.authorization.ui.BackgroundAuthorizationScreen
+import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 
 
@@ -24,16 +22,20 @@ import ru.sibsutis.core.utils.daggerViewModel
 fun AuthorizationNavHost(
     navController: NavHostController,
     startDestination: Route,
-    paddingValues: PaddingValues,
-    authorizationComponent: AuthorizationComponent,
+    modifier: Modifier,
+    coreComponent: CoreComponent,
     application: Application,
     role: MutableState<Role?>
 ) {
 
+    val authorizationComponent by lazy {
+        DaggerAuthorizationComponent.builder().coreComponent(coreComponent).build()
+    }
+
     NavHost(
         navController = navController,
         startDestination = startDestination,
-        modifier = Modifier.padding(paddingValues)
+        modifier = modifier
     ) {
         composable<Route.AuthorizationRoute> {
             val getTokenUseCase =

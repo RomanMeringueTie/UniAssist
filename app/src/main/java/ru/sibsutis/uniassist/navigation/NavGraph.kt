@@ -1,25 +1,23 @@
 package ru.sibsutis.uniassist.navigation
 
 import android.app.Application
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import ru.sibsutis.authorization.data.model.Role
 import ru.sibsutis.authorization.data.model.UserData
-import ru.sibsutis.authorization.di.AuthorizationComponent
-import ru.sibsutis.student.di.StudentComponent
+import ru.sibsutis.core.di.CoreComponent
 
 @Composable
 fun NavGraph(
     navController: NavHostController,
-    studentComponent: StudentComponent,
+    coreComponent: CoreComponent,
     isBottomBarShown: MutableState<Boolean>,
-    paddingValues: PaddingValues,
+    modifier: Modifier,
     application: Application,
-    authorizationComponent: AuthorizationComponent,
     startDestination: Route
 ) {
     val userRole = remember { mutableStateOf(UserData.role) }
@@ -29,9 +27,9 @@ fun NavGraph(
         Role.Student -> {
             StudentNavHost(
                 navController = navController,
-                studentComponent = studentComponent,
+                coreComponent = coreComponent,
                 isBottomBarShown = isBottomBarShown,
-                paddingValues = paddingValues
+                modifier = modifier
             )
         }
 
@@ -39,7 +37,7 @@ fun NavGraph(
             TeacherNavHost(
                 navController = navController,
                 isBottomBarShown = isBottomBarShown,
-                paddingValues = paddingValues
+                modifier = modifier
             )
         }
 
@@ -47,8 +45,8 @@ fun NavGraph(
             AuthorizationNavHost(
                 navController = navController,
                 startDestination = startDestination,
-                paddingValues = paddingValues,
-                authorizationComponent = authorizationComponent,
+                modifier = modifier,
+                coreComponent = coreComponent,
                 application = application,
                 role = userRole
             )

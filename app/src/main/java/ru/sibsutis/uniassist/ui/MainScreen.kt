@@ -2,6 +2,7 @@ package ru.sibsutis.uniassist.ui
 
 import android.app.Application
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -10,8 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import ru.sibsutis.authorization.di.AuthorizationComponent
-import ru.sibsutis.student.di.StudentComponent
+import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.uniassist.navigation.BottomBar
 import ru.sibsutis.uniassist.navigation.NavGraph
 import ru.sibsutis.uniassist.presentation.MainActivityViewModel
@@ -20,8 +20,7 @@ import ru.sibsutis.uniassist.presentation.MainActivityViewModel
 fun MainScreen(
     application: Application,
     mainViewModel: MainActivityViewModel,
-    authorizationComponent: AuthorizationComponent,
-    studentComponent: StudentComponent,
+    coreComponent: CoreComponent,
 ) {
     val navController = rememberNavController()
     val isBottomBarShown = rememberSaveable { mutableStateOf(false) }
@@ -39,10 +38,9 @@ fun MainScreen(
         }) { paddingValues ->
         NavGraph(
             navController = navController,
-            studentComponent = studentComponent,
             isBottomBarShown = isBottomBarShown,
-            paddingValues = paddingValues,
-            authorizationComponent = authorizationComponent,
+            modifier = Modifier.padding(paddingValues),
+            coreComponent = coreComponent,
             startDestination = state.value,
             application = application
         )
