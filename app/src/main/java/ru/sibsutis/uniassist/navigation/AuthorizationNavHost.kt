@@ -25,7 +25,6 @@ fun AuthorizationNavHost(
     modifier: Modifier,
     coreComponent: CoreComponent,
     application: Application,
-    role: MutableState<Role?>
 ) {
 
     val authorizationComponent by lazy {
@@ -50,9 +49,6 @@ fun AuthorizationNavHost(
                 }
             AuthorizationScreen(
                 viewModel = viewModel,
-                onClick = {
-                    role.value = UserData.role
-                }
             )
         }
         composable<Route.BackgroundAuthorizationRoute> {
@@ -68,9 +64,6 @@ fun AuthorizationNavHost(
                 }
             BackgroundAuthorizationScreen(
                 viewModel = viewModel,
-                onContent = {
-                    role.value = UserData.role
-                },
                 onFailure = {
                     navController.navigate(Route.AuthorizationRoute)
                 }

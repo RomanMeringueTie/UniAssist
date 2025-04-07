@@ -2,6 +2,7 @@ package ru.sibsutis.uniassist.navigation
 
 import android.app.Application
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,9 +21,8 @@ fun NavGraph(
     application: Application,
     startDestination: Route
 ) {
-    val userRole = remember { mutableStateOf(UserData.role) }
 
-    when (userRole.value) {
+    when (UserData.role.value) {
 
         Role.Student -> {
             StudentNavHost(
@@ -48,7 +48,6 @@ fun NavGraph(
                 modifier = modifier,
                 coreComponent = coreComponent,
                 application = application,
-                role = userRole
             )
         }
     }

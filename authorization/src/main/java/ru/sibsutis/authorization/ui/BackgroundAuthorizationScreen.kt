@@ -14,7 +14,6 @@ import ru.sibsutis.core.ui.StableWrapper
 @Composable
 fun BackgroundAuthorizationScreen(
     viewModel: BackgroundAuthorizationViewModel,
-    onContent: () -> Unit,
     onFailure: () -> Unit
 ) {
     val state = viewModel.state.collectAsState()
@@ -23,7 +22,6 @@ fun BackgroundAuthorizationScreen(
     when (state.value) {
 
         is State.Content -> {
-            onContent()
         }
 
         is State.Failure -> {

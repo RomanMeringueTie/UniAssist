@@ -50,7 +50,6 @@ import ru.sibsutis.core.ui.LoadingIndicator
 @Composable
 fun AuthorizationScreen(
     viewModel: AuthorizationViewModel,
-    onClick: () -> Unit,
 ) {
 
     val state by viewModel.state.collectAsState()
@@ -99,7 +98,6 @@ fun AuthorizationScreen(
             )
             LoadingOrError(
                 state = state.state,
-                onContent = onClick
             )
             Spacer(modifier = Modifier.height(10.dp))
             Button(
@@ -126,7 +124,7 @@ fun AuthorizationScreen(
 }
 
 @Composable
-private fun LoadingOrError(state: LoginState, onContent: () -> Unit) {
+private fun LoadingOrError(state: LoginState) {
     when (state) {
         LoginState.Loading -> {
             LoadingIndicator(
@@ -138,7 +136,6 @@ private fun LoadingOrError(state: LoginState, onContent: () -> Unit) {
 
         is LoginState.Content -> {
             Spacer(modifier = Modifier.height(40.dp))
-            onContent()
         }
 
         is LoginState.Failure -> {

@@ -55,7 +55,7 @@ class AuthorizationViewModel(
                     UserData.apply {
                         token = it.token
                         fullName = it.fullName
-                        role = it.role
+                        role.value = it.role
                         unit = it.unit
                     }
                 },
