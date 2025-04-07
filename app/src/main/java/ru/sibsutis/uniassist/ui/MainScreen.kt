@@ -5,15 +5,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import ru.sibsutis.authorization.di.AuthorizationComponent
 import ru.sibsutis.student.di.StudentComponent
 import ru.sibsutis.uniassist.navigation.BottomBar
 import ru.sibsutis.uniassist.navigation.NavGraph
-import ru.sibsutis.uniassist.navigation.Route
 import ru.sibsutis.uniassist.presentation.MainActivityViewModel
 
 @Composable
@@ -22,17 +22,10 @@ fun MainScreen(
     mainViewModel: MainActivityViewModel,
     authorizationComponent: AuthorizationComponent,
     studentComponent: StudentComponent,
-    navController: NavHostController,
-    isBottomBarShown: MutableState<Boolean>
 ) {
-
-    val isAuthorized = mainViewModel.isAuthorized.collectAsState()
-    val startDestination by lazy {
-        if (!isAuthorized.value) Route.AuthorizationRoute else Route.BackgroundAuthorizationRoute(
-            login = mainViewModel.login ?: "",
-            password = mainViewModel.password ?: ""
-        )
-    }
+    val navController = rememberNavController()
+    val isBottomBarShown = rememberSaveable { mutableStateOf(false) }
+    val state = mainViewModel.startDestination.collectAsState()
 
     Scaffold(
         modifier = Modifier
@@ -49,9 +42,9 @@ fun MainScreen(
             studentComponent = studentComponent,
             isBottomBarShown = isBottomBarShown,
             paddingValues = paddingValues,
-            application = application,
             authorizationComponent = authorizationComponent,
-            startDestination = startDestination
+            startDestination = state.value,
+            application = application
         )
     }
 }
