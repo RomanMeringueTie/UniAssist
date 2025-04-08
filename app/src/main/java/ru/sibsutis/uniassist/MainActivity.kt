@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.ViewModelProvider
+import ru.sibsutis.authorization.di.DaggerAuthorizationComponent
 import ru.sibsutis.core.di.DaggerCoreComponent
 import ru.sibsutis.uniassist.presentation.MainActivityViewModel
 import ru.sibsutis.uniassist.ui.MainScreen
@@ -14,8 +15,10 @@ class MainActivity :
     ComponentActivity() {
 
     private val coreComponent by lazy { DaggerCoreComponent.builder().build() }
-
-
+    private val authorizationComponent by lazy {
+        DaggerAuthorizationComponent.builder().coreComponent(coreComponent)
+            .context(applicationContext).build()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -27,7 +30,7 @@ class MainActivity :
                 MainScreen(
                     mainViewModel = viewModel,
                     coreComponent = coreComponent,
-                    application = application
+                    authorizationComponent = authorizationComponent
                 )
             }
         }

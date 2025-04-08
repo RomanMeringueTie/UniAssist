@@ -1,7 +1,7 @@
 package ru.sibsutis.authorization.presentation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import android.content.Context
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -11,8 +11,8 @@ import ru.sibsutis.authorization.domain.GetTokenUseCase
 
 class AuthorizationViewModel(
     private val getTokenUseCase: GetTokenUseCase,
-    private val application: Application
-) : AndroidViewModel(application = application) {
+    private val context: Context
+) : ViewModel() {
 
     private val _state = MutableStateFlow(AuthorizationScreenState())
     val state = _state
@@ -49,8 +49,8 @@ class AuthorizationViewModel(
                 getTokenUseCase(_state.value.login, _state.value.password)
             result.fold(
                 onSuccess = {
-                    SecureSharedPrefs.encryptData(_state.value.login, "login", application)
-                    SecureSharedPrefs.encryptData(_state.value.password, "password", application)
+                    SecureSharedPrefs.encryptData(_state.value.login, "login", context)
+                    SecureSharedPrefs.encryptData(_state.value.password, "password", context)
                     _state.value = _state.value.copy(state = LoginState.Content(it))
                     UserData.apply {
                         token = it.token
