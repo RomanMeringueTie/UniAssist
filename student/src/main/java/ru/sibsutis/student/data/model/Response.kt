@@ -8,7 +8,7 @@ data class Response(
     @SerialName("id")
     val id: Int,
     @SerialName("student_id")
-    val student_id: Int,
+    val studentId: Int,
     @SerialName("body")
     val body: String,
     @SerialName("mark")

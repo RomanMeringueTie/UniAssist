@@ -1,4 +1,4 @@
-package ru.sibsutis.student.data.model
+package ru.sibsutis.teacher.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

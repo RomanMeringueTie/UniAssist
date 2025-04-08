@@ -1,5 +1,7 @@
 package ru.sibsutis.student.ui
 
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import ru.sibsutis.student.data.model.ClassModel
 import ru.sibsutis.student.data.model.Response
 import ru.sibsutis.student.data.model.Task
@@ -35,13 +37,13 @@ class ClassConverter {
         } else null
     }
 
-    private fun convertTaskResponses(responseModelsList: List<Response>?): List<ResponseUI>? {
+    private fun convertTaskResponses(responseModelsList: List<Response>?): ImmutableList<ResponseUI>? {
         return responseModelsList?.map {
             ResponseUI(
                 body = it.body,
                 mark = it.mark
             )
-        }
+        }?.toImmutableList()
     }
 
 

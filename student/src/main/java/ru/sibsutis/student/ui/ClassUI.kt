@@ -1,5 +1,6 @@
 package ru.sibsutis.student.ui
 
+import kotlinx.collections.immutable.ImmutableList
 import ru.sibsutis.student.data.model.ClassType
 
 data class ClassUI(
@@ -16,7 +17,7 @@ data class ClassUI(
 data class TaskUI(
     val header: String,
     val body: String,
-    val responses: List<ResponseUI>?
+    val responses: ImmutableList<ResponseUI>?
 )
 
 data class ResponseUI(
