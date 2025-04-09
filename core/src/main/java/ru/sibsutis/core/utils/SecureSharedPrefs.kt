@@ -1,13 +1,17 @@
-package ru.sibsutis.authorization.data.manager
+package ru.sibsutis.core.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
-object SecureSharedPrefs {
-    private const val PREFS_FILE_NAME = "secure_prefs"
-    private const val KEY_ALIAS = "key_alias"
+class SecureSharedPrefs(private val context: Context) {
+
+    companion object {
+        private const val PREFS_FILE_NAME = "secure_prefs"
+        private const val KEY_ALIAS = "key_alias"
+    }
 
     private fun getSharedPreferences(context: Context): SharedPreferences {
         val masterKeyAlias =
@@ -22,14 +26,14 @@ object SecureSharedPrefs {
         )
     }
 
-    fun encryptData(data: String, key: String, context: Context) {
+    fun encryptData(data: String, key: String) {
         val sharedPreferences = getSharedPreferences(context)
-        val editor = sharedPreferences.edit()
-        editor.putString(key, data)
-        editor.apply()
+        sharedPreferences.edit {
+            putString(key, data)
+        }
     }
 
-    fun decryptData(key: String, context: Context): String? {
+    fun decryptData(key: String): String? {
         val sharedPreferences = getSharedPreferences(context)
         return sharedPreferences.getString(key, null)
     }

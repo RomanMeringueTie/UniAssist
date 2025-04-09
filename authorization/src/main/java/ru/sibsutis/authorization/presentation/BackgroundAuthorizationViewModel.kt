@@ -1,19 +1,18 @@
 package ru.sibsutis.authorization.presentation
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.sibsutis.authorization.data.manager.SecureSharedPrefs
 import ru.sibsutis.authorization.data.model.UserData
 import ru.sibsutis.authorization.domain.GetTokenUseCase
 import ru.sibsutis.core.presentation.State
+import ru.sibsutis.core.utils.SecureSharedPrefs
 
 class BackgroundAuthorizationViewModel(
     private val getTokenUseCase: GetTokenUseCase,
-    private val context: Context
+    private val secureSharedPrefs: SecureSharedPrefs
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<State<Any>>(value = State.Loading)
@@ -21,8 +20,8 @@ class BackgroundAuthorizationViewModel(
 
     init {
         viewModelScope.launch {
-            val login = SecureSharedPrefs.decryptData("login", context)!!
-            val password = SecureSharedPrefs.decryptData("password", context)!!
+            val login = secureSharedPrefs.decryptData("login")!!
+            val password = secureSharedPrefs.decryptData("password")!!
             val result = getTokenUseCase(login, password)
             result.fold(
                 onSuccess = {

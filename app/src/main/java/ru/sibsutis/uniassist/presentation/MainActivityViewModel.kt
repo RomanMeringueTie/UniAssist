@@ -1,14 +1,13 @@
 package ru.sibsutis.uniassist.presentation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import ru.sibsutis.authorization.data.manager.SecureSharedPrefs
+import ru.sibsutis.core.utils.SecureSharedPrefs
 import ru.sibsutis.uniassist.navigation.Route
 
-class MainActivityViewModel(application: Application) :
-    AndroidViewModel(application = application) {
+class MainActivityViewModel(secureSharedPrefs: SecureSharedPrefs) :
+    ViewModel() {
 
     private val _startDestination: MutableStateFlow<Route> =
         MutableStateFlow(Route.AuthorizationRoute)
@@ -20,8 +19,8 @@ class MainActivityViewModel(application: Application) :
         private set
 
     init {
-        login = SecureSharedPrefs.decryptData("login", application)
-        password = SecureSharedPrefs.decryptData("password", application)
+        login = secureSharedPrefs.decryptData("login")
+        password = secureSharedPrefs.decryptData("password")
         if (login != null && password != null) {
             _startDestination.value = Route.BackgroundAuthorizationRoute(login!!, password!!)
         }

@@ -6,8 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.sibsutis.authorization.di.AuthorizationComponent
+import ru.sibsutis.authorization.di.DaggerAuthorizationComponent
 import ru.sibsutis.authorization.ui.AuthorizationScreen
 import ru.sibsutis.authorization.ui.BackgroundAuthorizationScreen
+import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 
 
@@ -16,8 +18,12 @@ fun AuthorizationNavHost(
     navController: NavHostController,
     startDestination: Route,
     modifier: Modifier,
-    authorizationComponent: AuthorizationComponent
+    coreComponent: CoreComponent
 ) {
+
+    val authorizationComponent by lazy {
+        DaggerAuthorizationComponent.builder().coreComponent(coreComponent).build()
+    }
 
     NavHost(
         navController = navController,
@@ -32,11 +38,10 @@ fun AuthorizationNavHost(
                     authorizationComponent.getAuthorizationViewModel()
                 }
             AuthorizationScreen(
-                viewModel = viewModel,
+                viewModel = viewModel
             )
         }
         composable<Route.BackgroundAuthorizationRoute> {
-
             // TODO("Заменить на фабрику viewModel")
             val viewModel =
                 daggerViewModel(key = "BackgroundAuthorizationViewModel") {

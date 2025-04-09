@@ -43,8 +43,6 @@ android {
 }
 
 dependencies {
-    // Keystore
-    implementation(libs.androidx.security.crypto)
 
     // Dagger 2
     implementation(libs.dagger)
