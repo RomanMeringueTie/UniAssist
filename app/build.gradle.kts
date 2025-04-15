@@ -58,6 +58,7 @@ dependencies {
     implementation(project(":teacher"))
     // Dagger 2
     implementation(libs.dagger)
+    implementation(project(":authorization"))
     kapt(libs.dagger.compiler)
 
     implementation(libs.kotlinx.serialization.json)

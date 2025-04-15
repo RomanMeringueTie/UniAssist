@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import kotlinx.collections.immutable.toImmutableList
+import ru.sibsutis.core.presentation.State
 import ru.sibsutis.core.ui.ErrorDialog
 import ru.sibsutis.core.ui.LoadingIndicator
-import ru.sibsutis.student.presentation.State
 import ru.sibsutis.student.presentation.StudentScheduleState
 
 

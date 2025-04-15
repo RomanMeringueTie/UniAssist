@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
+import ru.sibsutis.core.presentation.State
 import ru.sibsutis.student.domain.GetStudentScheduleUseCase
 import ru.sibsutis.student.ui.ClassConverter
 

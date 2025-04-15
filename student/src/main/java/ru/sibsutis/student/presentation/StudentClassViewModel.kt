@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import ru.sibsutis.core.presentation.State
 import ru.sibsutis.student.domain.GetStudentClassUseCase
 import ru.sibsutis.student.ui.ClassConverter
 import ru.sibsutis.student.ui.ClassUI

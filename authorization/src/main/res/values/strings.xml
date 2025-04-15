@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="student">Студент</string>
+    <string name="teacher">Преподаватель</string>
+    <string name="login">Войти</string>
+    <string name="pick_a_role">Выберите роль</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="login_header">Вход</string>
+</resources>
