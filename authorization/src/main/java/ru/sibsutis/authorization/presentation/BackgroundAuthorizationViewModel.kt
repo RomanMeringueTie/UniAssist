@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import ru.sibsutis.authorization.data.model.UserData
 import ru.sibsutis.authorization.domain.GetTokenUseCase
 import ru.sibsutis.core.presentation.State
-import ru.sibsutis.core.utils.SecureSharedPrefs
+import ru.sibsutis.authorization.data.manager.SecureSharedPrefs
 
 class BackgroundAuthorizationViewModel(
     private val getTokenUseCase: GetTokenUseCase,

@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import ru.sibsutis.authorization.di.AuthorizationComponent
 import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.uniassist.navigation.BottomBar
 import ru.sibsutis.uniassist.navigation.NavGraph
@@ -19,6 +20,7 @@ import ru.sibsutis.uniassist.presentation.MainActivityViewModel
 fun MainScreen(
     mainViewModel: MainActivityViewModel,
     coreComponent: CoreComponent,
+    authorizationComponent: AuthorizationComponent
 ) {
     val navController = rememberNavController()
     val isBottomBarShown = rememberSaveable { mutableStateOf(false) }
@@ -39,6 +41,7 @@ fun MainScreen(
             isBottomBarShown = isBottomBarShown,
             modifier = Modifier.padding(paddingValues),
             coreComponent = coreComponent,
+            authorizationComponent = authorizationComponent,
             startDestination = state.value,
         )
     }
