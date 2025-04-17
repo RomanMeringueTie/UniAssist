@@ -43,6 +43,9 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":authorization"))
+
+    implementation(libs.qrose)
 
     // Immutable Collections
     implementation(libs.jetbrains.kotlinx.collections.immutable)
