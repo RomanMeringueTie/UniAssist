@@ -37,7 +37,7 @@ fun StudentNavHost(
         composable<Route.ScheduleRoute> {
             val viewModel =
                 daggerViewModel(key = "ScheduleViewModel") { studentComponent.getScheduleViewModel() }
-            StudentScheduleScreen(viewModel) { id: String ->
+            StudentScheduleScreen(viewModel) { id ->
                 navController.navigate(
                     Route.ClassRoute(id)
                 )
