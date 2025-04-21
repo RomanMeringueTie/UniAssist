@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import ru.sibsutis.authorization.data.model.UserData
 import ru.sibsutis.core.di.DaggerCoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 import ru.sibsutis.uniassist.di.DaggerAppComponent
@@ -14,7 +15,7 @@ class MainActivity :
     ComponentActivity() {
 
     private val coreComponent by lazy {
-        DaggerCoreComponent.builder().context(applicationContext).build()
+        DaggerCoreComponent.builder().context(applicationContext).tokenProvider(UserData).build()
     }
 
     private val appComponent by lazy {

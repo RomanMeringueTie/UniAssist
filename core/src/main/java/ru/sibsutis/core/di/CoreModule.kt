@@ -5,13 +5,14 @@ import dagger.Module
 import dagger.Provides
 import ru.sibsutis.core.network.KtorClient
 import ru.sibsutis.core.utils.SecureSharedPrefs
+import ru.sibsutis.core.utils.TokenProvider
 import javax.inject.Singleton
 
 @Module
 class CoreModule {
     @Provides
     @Singleton
-    fun provideKtorClient() = KtorClient()
+    fun provideKtorClient(tokenProvider: TokenProvider) = KtorClient(tokenProvider)
 
     @Provides
     fun provideSecureSharedPrefs(context: Context) = SecureSharedPrefs(context)

@@ -23,7 +23,6 @@ class AuthorizationService(private val ktorClient: KtorClient) {
                 Request(login = login, password = password)
             )
         }.body()
-        ktorClient.setToken(response.token)
         return response
     }
 }
