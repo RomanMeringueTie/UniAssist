@@ -4,7 +4,7 @@ import kotlinx.collections.immutable.ImmutableList
 import ru.sibsutis.student.data.model.ClassType
 
 data class ClassUI(
-    val id: Int,
+    val id: String,
     val subject: String,
     val startTime: String,
     val endTime: String,

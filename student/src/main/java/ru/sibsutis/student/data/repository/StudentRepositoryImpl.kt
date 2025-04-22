@@ -9,7 +9,7 @@ class StudentRepositoryImpl(private val service: StudentService) : StudentReposi
         return service.getSchedule(date)
     }
 
-    override suspend fun getClass(id: Int): ClassModel {
+    override suspend fun getClass(id: String): ClassModel {
         return service.getClass(id)
     }
 }
