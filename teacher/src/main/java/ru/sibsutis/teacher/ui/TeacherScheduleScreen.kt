@@ -34,7 +34,7 @@ import ru.sibsutis.teacher.presentation.TeacherScheduleViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition", "SimpleDateFormat")
 @Composable
-fun TeacherScheduleScreen(viewModel: TeacherScheduleViewModel) {
+fun TeacherScheduleScreen(viewModel: TeacherScheduleViewModel, onItemClick: (String) -> Unit) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     Column {
         Column(
@@ -96,6 +96,8 @@ fun TeacherScheduleScreen(viewModel: TeacherScheduleViewModel) {
             { viewModel.changePickedDate(state.date.minus(value = 1, unit = DateTimeUnit.DAY)) },
             onSwipeLeft =
             { viewModel.changePickedDate(state.date.plus(value = 1, unit = DateTimeUnit.DAY)) },
-            onRetry = { viewModel.changePickedDate(Clock.System.todayIn(TimeZone.currentSystemDefault())) })
+            onRetry = { viewModel.changePickedDate(Clock.System.todayIn(TimeZone.currentSystemDefault())) },
+            onItemClick = onItemClick
+        )
     }
 }

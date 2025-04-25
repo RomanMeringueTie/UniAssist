@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ClassModel(
     @SerialName("id")
-    val id: Int,
+    val id: String,
     @SerialName("subject")
     val subject: String,
     @SerialName("startTime")
