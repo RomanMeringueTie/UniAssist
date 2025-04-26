@@ -1,7 +1,5 @@
 package ru.sibsutis.uniassist.navigation
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier

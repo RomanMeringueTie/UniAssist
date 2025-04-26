@@ -28,7 +28,7 @@ internal fun TeacherClassContent (classItem: ClassUI) {
     ) {
         TeacherClassHeader(classItem = classItem)
         TeacherClassDetails(classItem = classItem)
-        if (classItem.task != null)
+        if (classItem.task != null) {
             Button(
                 modifier = Modifier.padding(top = 20.dp),
                 onClick = {},
@@ -45,5 +45,23 @@ internal fun TeacherClassContent (classItem: ClassUI) {
                     fontSize = 22.sp
                 )
             }
+        } else {
+            Button(
+                modifier = Modifier.padding(top = 20.dp),
+                onClick = {},
+                colors = ButtonColors(
+                    containerColor = colorResource(id = R.color.blue),
+                    contentColor = ButtonDefaults.buttonColors().contentColor,
+                    disabledContentColor = ButtonDefaults.buttonColors().disabledContentColor,
+                    disabledContainerColor = ButtonDefaults.buttonColors().disabledContainerColor
+                )
+            ) {
+                Text(
+                    modifier = Modifier.padding(5.dp),
+                    text = stringResource(id = R.string.add_task),
+                    fontSize = 22.sp
+                )
+            }
+        }
     }
 }

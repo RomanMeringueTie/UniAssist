@@ -32,8 +32,8 @@ internal fun TeacherClassDetails(classItem: ClassUI) {
         if (classItem.task == null) {
             Text(
                 modifier = textModifier,
-                text = stringResource(id = R.string.empty_task),
-                textAlign = TextAlign.Center,
+                text = classItem.group,
+                textAlign = TextAlign.Start,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.Black

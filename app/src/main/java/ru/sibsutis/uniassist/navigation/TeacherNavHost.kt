@@ -55,7 +55,6 @@ fun TeacherNavHost(
             }
         }
         composable<Route.ClassRoute> { backStackEntry ->
-            Text("Class")
             val getTeacherClassUseCase =
                 teacherComponent.getTeacherClassUseCase()
             val classConverter = teacherComponent.getClassConverter()
