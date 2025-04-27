@@ -30,7 +30,7 @@ internal fun StudentScheduleContent(
     list: ImmutableList<ClassUI>,
     onSwipeRight: () -> Unit,
     onSwipeLeft: () -> Unit,
-    onItemClick: (Int) -> Unit
+    onItemClick: (String) -> Unit
 ) {
     var offset by remember { mutableFloatStateOf(0f) }
     LazyColumn(

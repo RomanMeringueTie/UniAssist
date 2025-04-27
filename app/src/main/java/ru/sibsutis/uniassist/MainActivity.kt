@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import ru.sibsutis.authorization.di.DaggerAuthorizationComponent
 import ru.sibsutis.core.di.DaggerCoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 import ru.sibsutis.uniassist.di.DaggerAppComponent
@@ -28,7 +27,6 @@ class MainActivity :
         DaggerAppComponent.builder().coreComponent(coreComponent)
             .authorizationComponent(authorizationComponent).build()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()

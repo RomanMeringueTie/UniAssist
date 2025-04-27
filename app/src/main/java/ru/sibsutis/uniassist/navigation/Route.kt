@@ -20,5 +20,5 @@ sealed interface Route {
     data object ProfileRoute : Route
 
     @Serializable
-    data class ClassRoute(val id: Int) : Route
+    data class ClassRoute(val id: String) : Route
 }

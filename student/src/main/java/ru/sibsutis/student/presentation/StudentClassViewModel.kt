@@ -13,7 +13,7 @@ import ru.sibsutis.student.ui.ClassUI
 class StudentClassViewModel(
     private val classConverter: ClassConverter,
     private val getStudentClassUseCase: GetStudentClassUseCase,
-    private val id: Int
+    private val id: String
 ) :
     ViewModel() {
 
@@ -27,7 +27,7 @@ class StudentClassViewModel(
     }
 
 
-    private fun loadClass(id: Int) {
+    private fun loadClass(id: String) {
         if (_state.value != State.Loading)
             return
         viewModelScope.launch {

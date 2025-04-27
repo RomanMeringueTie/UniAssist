@@ -34,7 +34,7 @@ import ru.sibsutis.student.presentation.StudentScheduleViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition", "SimpleDateFormat")
 @Composable
-fun StudentScheduleScreen(viewModel: StudentScheduleViewModel, onItemClick: (Int) -> Unit) {
+fun StudentScheduleScreen(viewModel: StudentScheduleViewModel, onItemClick: (String) -> Unit) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     Column {
         Column(
