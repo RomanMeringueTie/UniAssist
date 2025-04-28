@@ -16,6 +16,7 @@ import ru.sibsutis.core.utils.daggerViewModel
 import ru.sibsutis.student.di.DaggerStudentComponent
 import ru.sibsutis.student.presentation.StudentClassViewModel
 import ru.sibsutis.student.ui.StudentClassScreen
+import ru.sibsutis.student.ui.StudentProfileScreen
 import ru.sibsutis.student.ui.StudentScheduleScreen
 
 @Composable
@@ -48,12 +49,7 @@ fun StudentNavHost(
             Text(text = "Messages")
         }
         composable<Route.ProfileRoute> {
-            Column(modifier = Modifier.fillMaxSize()) {
-                UserData.apply {
-                    Text(text = fullName ?: "NoName")
-                    Text(text = unit ?: "NoUnit")
-                }
-            }
+            StudentProfileScreen()
         }
         composable<Route.ClassRoute> { backStackEntry ->
             val getStudentClassUseCase =
