@@ -43,8 +43,6 @@ android {
 }
 
 dependencies {
-    // Keystore
-    implementation(libs.androidx.security.crypto)
 
     // Ktor
     implementation(libs.ktor.client.core)

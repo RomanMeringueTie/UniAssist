@@ -3,7 +3,7 @@ package ru.sibsutis.uniassist.presentation
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import ru.sibsutis.core.utils.SecureSharedPrefs
+import ru.sibsutis.authorization.data.manager.SecureSharedPrefs
 import ru.sibsutis.uniassist.navigation.Route
 
 class MainActivityViewModel(secureSharedPrefs: SecureSharedPrefs) :

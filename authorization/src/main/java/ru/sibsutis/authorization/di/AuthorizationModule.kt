@@ -1,7 +1,9 @@
 package ru.sibsutis.authorization.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
+import ru.sibsutis.authorization.data.manager.SecureSharedPrefs
 import ru.sibsutis.authorization.data.repository.AuthorizationRepository
 import ru.sibsutis.authorization.data.repository.AuthorizationRepositoryImpl
 import ru.sibsutis.authorization.data.service.AuthorizationService
@@ -10,7 +12,6 @@ import ru.sibsutis.authorization.domain.GetTokenUseCaseImpl
 import ru.sibsutis.authorization.presentation.AuthorizationViewModel
 import ru.sibsutis.authorization.presentation.BackgroundAuthorizationViewModel
 import ru.sibsutis.core.network.KtorClient
-import ru.sibsutis.core.utils.SecureSharedPrefs
 
 @Module
 class AuthorizationModule {
@@ -38,4 +39,8 @@ class AuthorizationModule {
         secureSharedPrefs: SecureSharedPrefs,
         getTokenUseCase: GetTokenUseCase
     ) = BackgroundAuthorizationViewModel(getTokenUseCase, secureSharedPrefs)
+
+
+    @Provides
+    fun provideSecureSharedPrefs(context: Context) = SecureSharedPrefs(context)
 }

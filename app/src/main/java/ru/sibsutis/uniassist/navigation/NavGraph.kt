@@ -6,12 +6,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import ru.sibsutis.authorization.data.model.Role
 import ru.sibsutis.authorization.data.model.UserData
+import ru.sibsutis.authorization.di.AuthorizationComponent
 import ru.sibsutis.core.di.CoreComponent
 
 @Composable
 fun NavGraph(
     navController: NavHostController,
     coreComponent: CoreComponent,
+    authorizationComponent: AuthorizationComponent,
     isBottomBarShown: MutableState<Boolean>,
     modifier: Modifier,
     startDestination: Route
@@ -41,7 +43,7 @@ fun NavGraph(
                 navController = navController,
                 startDestination = startDestination,
                 modifier = modifier,
-                coreComponent = coreComponent
+                authorizationComponent = authorizationComponent
             )
         }
     }
