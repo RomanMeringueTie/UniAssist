@@ -24,11 +24,11 @@ fun StudentProfileHeader() {
         modifier = Modifier
             .fillMaxWidth()
             .background(color = colorResource(id = R.color.background))
-            .padding(bottom = 5.dp),
+            .padding(bottom = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            modifier = Modifier.padding(top = 5.dp),
+            modifier = Modifier.padding(top = 8.dp),
             text = UserData.fullName ?: stringResource(R.string.unknown_user),
             textAlign = TextAlign.Center,
             fontSize = 28.sp,
