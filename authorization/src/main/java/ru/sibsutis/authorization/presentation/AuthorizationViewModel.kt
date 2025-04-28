@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import ru.sibsutis.authorization.data.model.UserData
 import ru.sibsutis.authorization.domain.GetTokenUseCase
-import ru.sibsutis.core.utils.SecureSharedPrefs
+import ru.sibsutis.authorization.data.manager.SecureSharedPrefs
 
 class AuthorizationViewModel(
     private val getTokenUseCase: GetTokenUseCase,

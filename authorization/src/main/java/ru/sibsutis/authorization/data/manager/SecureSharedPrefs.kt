@@ -1,4 +1,4 @@
-package ru.sibsutis.core.utils
+package ru.sibsutis.authorization.data.manager
 
 import android.content.Context
 import android.content.SharedPreferences

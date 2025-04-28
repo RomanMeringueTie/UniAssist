@@ -16,7 +16,7 @@ internal fun StudentScheduleScreenImpl(
     onSwipeRight: () -> Unit,
     onSwipeLeft: () -> Unit,
     onRetry: () -> Unit,
-    onItemClick: (Int) -> Unit
+    onItemClick: (String) -> Unit
 ) {
     when (state.listState) {
         is State.Content -> {

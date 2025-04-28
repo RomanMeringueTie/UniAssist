@@ -43,8 +43,6 @@ android {
 }
 
 dependencies {
-    // Keystore
-    implementation(libs.androidx.security.crypto)
 
     // Ktor
     implementation(libs.ktor.client.core)
@@ -52,6 +50,7 @@ dependencies {
     implementation(libs.ktor.client.logging)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.auth)
 
 
     // Dagger 2
