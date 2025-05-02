@@ -10,6 +10,7 @@ import ru.sibsutis.teacher.domain.GetTeacherClassUseCase
 import ru.sibsutis.teacher.domain.GetTeacherClassUseCaseImpl
 import ru.sibsutis.teacher.domain.GetTeacherScheduleUseCase
 import ru.sibsutis.teacher.domain.GetTeacherScheduleUseCaseImpl
+import ru.sibsutis.teacher.presentation.TeacherClassViewModel
 import ru.sibsutis.teacher.presentation.TeacherScheduleViewModel
 import ru.sibsutis.teacher.ui.ClassConverter
 
@@ -39,4 +40,12 @@ internal class TeacherModule {
     @Provides
     fun provideGetTeacherClassUseCase(teacherRepository: TeacherRepository): GetTeacherClassUseCase =
         GetTeacherClassUseCaseImpl(teacherRepository)
+
+    @Provides
+    fun provideTeacherClassViewModelFactory(
+        classConverter: ClassConverter,
+        getTeacherClassUseCase: GetTeacherClassUseCase
+    ): (String) -> TeacherClassViewModel = { id ->
+        TeacherClassViewModel(classConverter, getTeacherClassUseCase, id)
+    }
 }

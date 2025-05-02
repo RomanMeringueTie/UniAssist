@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -14,7 +15,6 @@ import ru.sibsutis.authorization.data.model.UserData
 import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 import ru.sibsutis.teacher.di.DaggerTeacherComponent
-import ru.sibsutis.teacher.presentation.TeacherClassViewModel
 import ru.sibsutis.teacher.ui.TeacherClassScreen
 import ru.sibsutis.teacher.ui.TeacherScheduleScreen
 
@@ -55,18 +55,9 @@ fun TeacherNavHost(
             }
         }
         composable<Route.ClassRoute> { backStackEntry ->
-            val getTeacherClassUseCase =
-                teacherComponent.getTeacherClassUseCase()
-            val classConverter = teacherComponent.getClassConverter()
             val id = backStackEntry.toRoute<Route.ClassRoute>().id
-            val viewModel: TeacherClassViewModel =
-                daggerViewModel (key = "TeacherClassViewModel-$id") {
-                    TeacherClassViewModel(
-                        classConverter,
-                        getTeacherClassUseCase,
-                        id
-                    )
-                }
+            val viewModelFactory = teacherComponent.getTeacherClassViewModelFactory()
+            val viewModel = remember { viewModelFactory(id) }
             TeacherClassScreen(
                 viewModel = viewModel
             )
