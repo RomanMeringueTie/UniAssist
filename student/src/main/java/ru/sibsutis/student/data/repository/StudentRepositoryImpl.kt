@@ -12,4 +12,8 @@ class StudentRepositoryImpl(private val service: StudentService) : StudentReposi
     override suspend fun getClass(id: String): ClassModel {
         return service.getClass(id)
     }
+
+    override suspend fun sendResponse(id: String, body: String) {
+        service.sendResponse(id, body)
+    }
 }

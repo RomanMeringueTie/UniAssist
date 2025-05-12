@@ -78,6 +78,7 @@ fun AuthorizationScreen(
                 color = colorResource(R.color.blue)
             )
             InputField(
+                state = state.state,
                 imageVector = Icons.Outlined.AccountCircle,
                 hint = stringResource(R.string.enter_login),
                 value = state.login,
@@ -86,6 +87,7 @@ fun AuthorizationScreen(
                 }
             )
             InputField(
+                state = state.state,
                 imageVector = Icons.Outlined.Lock,
                 hint = stringResource(R.string.enter_password),
                 value = state.password,
@@ -159,6 +161,7 @@ private fun LoadingOrError(state: LoginState) {
 
 @Composable
 private fun InputField(
+    state: LoginState,
     imageVector: ImageVector,
     hint: String,
     value: String,
@@ -193,6 +196,7 @@ private fun InputField(
             BasicTextField(
                 modifier = Modifier.padding(start = 5.dp),
                 value = value,
+                enabled = state is LoginState.Failure || state is LoginState.Initial,
                 textStyle = TextStyle(fontSize = 14.sp),
                 onValueChange = { it: String ->
                     onValueChange(it)

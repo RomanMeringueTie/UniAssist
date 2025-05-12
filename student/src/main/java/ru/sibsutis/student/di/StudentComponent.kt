@@ -4,6 +4,7 @@ import dagger.Component
 import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.core.di.CoreScope
 import ru.sibsutis.student.domain.GetStudentClassUseCase
+import ru.sibsutis.student.domain.SendStudentResponseUseCase
 import ru.sibsutis.student.presentation.StudentScheduleViewModel
 import ru.sibsutis.student.ui.ClassConverter
 
@@ -18,5 +19,6 @@ interface StudentComponent {
 
     fun getScheduleViewModel(): StudentScheduleViewModel
     fun getGetStudentClassUseCase(): GetStudentClassUseCase
+    fun getSendStudentResponseUseCase(): SendStudentResponseUseCase
     fun getClassConverter(): ClassConverter
 }
