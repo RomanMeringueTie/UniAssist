@@ -14,12 +14,38 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.collections.immutable.toImmutableList
 import ru.sibsutis.student.R
+import ru.sibsutis.student.data.model.ClassType
+import ru.sibsutis.student.presentation.ResponseState
 
 @Composable
-internal fun StudentClassContent(classItem: ClassUI) {
+internal fun StudentClassContent(
+    responseState: ResponseState,
+    classItem: ClassUI,
+    isDialogShown: Boolean,
+    textValue: String,
+    onValueChange: (String) -> Unit,
+    onClick: () -> Unit,
+    onAddResponse: () -> Unit,
+    onDismissRequest: () -> Unit
+) {
+
+    if (isDialogShown) {
+
+        StudentAddResponseDialog(
+            responseState = responseState,
+            onClick = onAddResponse,
+            onDismissRequest = onDismissRequest,
+            onValueChange = { newValue: String ->
+                onValueChange(newValue)
+            },
+            value = textValue
+        )
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -30,7 +56,7 @@ internal fun StudentClassContent(classItem: ClassUI) {
         StudentClassDetails(classItem = classItem)
         if (classItem.task != null)
             Button(
-                onClick = { },
+                onClick = onClick,
                 colors = ButtonColors(
                     containerColor = colorResource(id = R.color.blue),
                     contentColor = ButtonDefaults.buttonColors().contentColor,
@@ -46,4 +72,39 @@ internal fun StudentClassContent(classItem: ClassUI) {
                 )
             }
     }
+}
+
+@Composable
+@Preview
+private fun Preview_StudentClassContent() {
+    StudentClassContent(
+        responseState = ResponseState.Initial,
+        classItem = ClassUI(
+            id = "e01733c0-61f3",
+            subject = "Схемотехника",
+            startTime = "08:00",
+            endTime = "09:35",
+            type = ClassType.LABORATORY,
+            teacher = "Иванов В. П.",
+            classroom = "1 - 201",
+            task = TaskUI(
+                header = "Лабораторная № 3", body = "Сложная лаба", responses = listOf(
+                    ResponseUI(
+                        body = "Hello, World!",
+                        mark = null
+                    ),
+                    ResponseUI(
+                        body = "Work",
+                        mark = 1
+                    )
+                ).toImmutableList()
+            )
+        ),
+        isDialogShown = false,
+        textValue = "",
+        onValueChange = {},
+        onClick = {},
+        onAddResponse = {},
+        onDismissRequest = {}
+    )
 }

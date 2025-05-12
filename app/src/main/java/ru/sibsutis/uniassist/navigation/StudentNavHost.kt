@@ -1,7 +1,5 @@
 package ru.sibsutis.uniassist.navigation
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -10,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import ru.sibsutis.authorization.data.model.UserData
 import ru.sibsutis.core.di.CoreComponent
 import ru.sibsutis.core.utils.daggerViewModel
 import ru.sibsutis.student.di.DaggerStudentComponent
@@ -54,6 +51,7 @@ fun StudentNavHost(
         composable<Route.ClassRoute> { backStackEntry ->
             val getStudentClassUseCase =
                 studentComponent.getGetStudentClassUseCase()
+            val sendStudentResponseUseCase = studentComponent.getSendStudentResponseUseCase()
             val classConverter = studentComponent.getClassConverter()
             val id = backStackEntry.toRoute<Route.ClassRoute>().id
             // TODO("Заменить на фабрику viewModel")
@@ -62,6 +60,7 @@ fun StudentNavHost(
                     StudentClassViewModel(
                         classConverter,
                         getStudentClassUseCase,
+                        sendStudentResponseUseCase,
                         id
                     )
                 }

@@ -37,13 +37,13 @@ class ClassConverter {
         } else null
     }
 
-    private fun convertTaskResponses(responseModelsList: List<Response>?): ImmutableList<ResponseUI>? {
-        return responseModelsList?.map {
+    private fun convertTaskResponses(responseModelsList: List<Response>): ImmutableList<ResponseUI> {
+        return responseModelsList.map {
             ResponseUI(
                 body = it.body,
                 mark = it.mark
             )
-        }?.toImmutableList()
+        }.toImmutableList()
     }
 
 
