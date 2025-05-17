@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,7 +29,8 @@ import ru.sibsutis.teacher.R
 fun TeacherScheduleContent(
     list: ImmutableList<ClassUI>,
     onSwipeRight: () -> Unit,
-    onSwipeLeft: () -> Unit
+    onSwipeLeft: () -> Unit,
+    onItemClick: (String) -> Unit
 ) {
     var offset by remember { mutableFloatStateOf(0f) }
     LazyColumn(
@@ -49,6 +51,9 @@ fun TeacherScheduleContent(
             },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        item {
+            Spacer(modifier = Modifier.padding(top = 10.dp))
+        }
         items(list) {
             Box(
                 modifier = Modifier
@@ -56,9 +61,13 @@ fun TeacherScheduleContent(
                     .fillMaxWidth(0.9f)
                     .clip(RoundedCornerShape(10.dp))
                     .background(color = colorResource(id = R.color.background))
+                    .clickable { onItemClick(it.id) }
             ) {
                 TeacherScheduleClassItem(item = it)
             }
+        }
+        item {
+            Spacer(modifier = Modifier.padding(bottom = 10.dp))
         }
     }
 }

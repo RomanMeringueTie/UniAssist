@@ -8,4 +8,8 @@ class TeacherRepositoryImpl(private val service: TeacherService) : TeacherReposi
     override suspend fun getSchedule(date: LocalDate): List<ClassModel> {
         return service.getSchedule(date)
     }
+
+    override suspend fun getClass(id: String): ClassModel {
+        return service.getClass(id)
+    }
 }

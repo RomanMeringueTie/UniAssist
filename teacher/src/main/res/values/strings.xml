@@ -5,4 +5,6 @@
     <string name="practice">Практика</string>
     <string name="laboratory">Лабораторная</string>
     <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="view_answer">Посмотреть ответы</string>
+    <string name="add_task">Добавить задание</string>
 </resources>

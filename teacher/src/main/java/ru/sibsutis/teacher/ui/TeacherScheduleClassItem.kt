@@ -15,15 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.sibsutis.teacher.R
-import ru.sibsutis.teacher.data.model.ClassType
 
 @Composable
-fun TeacherScheduleClassItem(item: ClassUI) {
+internal fun TeacherScheduleClassItem(item: ClassUI) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -66,28 +64,19 @@ fun TeacherScheduleClassItem(item: ClassUI) {
                     color = Color.Black,
                     fontSize = 12.sp
                 )
-                if (item.taskHeader != null) {
+                if (item.task != null) {
                     VerticalDivider(
                         modifier = Modifier.padding(start = 3.dp, end = 3.dp),
                         color = Color.Black,
                         thickness = 1.dp
                     )
                     Text(
-                        text = item.taskHeader,
+                        text = item.task.header,
                         color = Color.Black,
                         fontSize = 12.sp
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun convertType(typeModel: ClassType): String {
-    return when (typeModel) {
-        ClassType.LECTURE -> stringResource(R.string.lecture)
-        ClassType.PRACTICE -> stringResource(R.string.practice)
-        ClassType.LABORATORY -> stringResource(R.string.laboratory)
     }
 }

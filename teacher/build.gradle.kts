@@ -45,17 +45,22 @@ android {
 
 dependencies {
     implementation(project(":core"))
-
-    implementation(libs.kotlinx.serialization.json)
+    implementation(project(":authorization"))
 
     // Immutable Collections
     implementation(libs.jetbrains.kotlinx.collections.immutable)
 
+    // Ktor
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.auth)
+
 // Dagger 2
     implementation(libs.dagger)
-    implementation(libs.androidx.foundation.android)
-    implementation(libs.foundation.android)
-    implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.foundation.layout.android)
     kapt(libs.dagger.compiler)
 
     // Jetpack Compose

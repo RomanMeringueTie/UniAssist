@@ -33,6 +33,7 @@ fun NavGraph(
         Role.Teacher -> {
             TeacherNavHost(
                 navController = navController,
+                coreComponent = coreComponent,
                 isBottomBarShown = isBottomBarShown,
                 modifier = modifier
             )
