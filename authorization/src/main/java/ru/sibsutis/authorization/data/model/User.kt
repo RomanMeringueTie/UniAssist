@@ -8,9 +8,16 @@ data class User(
     @SerialName("token")
     val token: String,
     @SerialName("fullName")
-    val fullName: String,
+    val fullName: FullName,
     @SerialName("role")
     val role: Role,
     @SerialName("unit")
     val unit: String,
+)
+
+@Serializable
+data class FullName(
+    val lastName: String,
+    val firstName: String,
+    val middleName: String
 )

@@ -44,7 +44,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.sibsutis.authorization.R
 import ru.sibsutis.authorization.presentation.AuthorizationViewModel
-import ru.sibsutis.authorization.presentation.LoginState
 import ru.sibsutis.core.ui.LoadingIndicator
 
 @Composable
@@ -78,7 +77,7 @@ fun AuthorizationScreen(
                 color = colorResource(R.color.blue)
             )
             InputField(
-                state = state.state,
+                isLoading = state.isLoading,
                 imageVector = Icons.Outlined.AccountCircle,
                 hint = stringResource(R.string.enter_login),
                 value = state.login,
@@ -87,7 +86,7 @@ fun AuthorizationScreen(
                 }
             )
             InputField(
-                state = state.state,
+                isLoading = state.isLoading,
                 imageVector = Icons.Outlined.Lock,
                 hint = stringResource(R.string.enter_password),
                 value = state.password,
@@ -99,7 +98,8 @@ fun AuthorizationScreen(
                 onVisibilityChange = { viewModel.changePasswordVisibility() }
             )
             LoadingOrError(
-                state = state.state,
+                isLoading = state.isLoading,
+                error = state.error,
             )
             Spacer(modifier = Modifier.height(10.dp))
             Button(
@@ -126,42 +126,34 @@ fun AuthorizationScreen(
 }
 
 @Composable
-private fun LoadingOrError(state: LoginState) {
-    when (state) {
-        LoginState.Loading -> {
-            LoadingIndicator(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp)
-            )
+private fun LoadingOrError(isLoading: Boolean, error: String?) {
+    when (isLoading) {
+
+        true -> {
+            LoadingIndicator(modifier = Modifier)
         }
 
-        is LoginState.Content -> {
-            Spacer(modifier = Modifier.height(40.dp))
-        }
+        false -> {
+            error?.let {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(40.dp)
+                        .padding(top = 10.dp),
+                    textAlign = TextAlign.Center,
+                    text = error,
+                    color = Color.Red,
+                    fontSize = 14.sp
+                )
+            } ?: Spacer(modifier = Modifier.height(40.dp))
 
-        is LoginState.Failure -> {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp)
-                    .padding(top = 10.dp),
-                textAlign = TextAlign.Center,
-                text = state.message,
-                color = Color.Red,
-                fontSize = 14.sp
-            )
-        }
-
-        LoginState.Initial -> {
-            Spacer(modifier = Modifier.height(40.dp))
         }
     }
 }
 
 @Composable
 private fun InputField(
-    state: LoginState,
+    isLoading: Boolean,
     imageVector: ImageVector,
     hint: String,
     value: String,
@@ -196,7 +188,7 @@ private fun InputField(
             BasicTextField(
                 modifier = Modifier.padding(start = 5.dp),
                 value = value,
-                enabled = state is LoginState.Failure || state is LoginState.Initial,
+                enabled = isLoading == false,
                 textStyle = TextStyle(fontSize = 14.sp),
                 onValueChange = { it: String ->
                     onValueChange(it)

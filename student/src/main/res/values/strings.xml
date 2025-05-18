@@ -16,4 +16,5 @@
     <string name="response_save_success">Ответ успешно загружен</string>
     <string name="send_response">Отправить</string>
     <string name="success">Success</string>
+    <string name="your_response">Ваш ответ на задание</string>
 </resources>

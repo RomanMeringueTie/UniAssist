@@ -5,6 +5,7 @@ import io.ktor.client.request.get
 import kotlinx.coroutines.delay
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import ru.sibsutis.authorization.data.model.FullName
 import ru.sibsutis.core.network.KtorClient
 import ru.sibsutis.student.data.model.ClassModel
 import ru.sibsutis.student.data.model.ClassType
@@ -33,7 +34,11 @@ class StudentService(private val ktorClient: KtorClient) {
             startTime = LocalTime(8, 0),
             endTime = LocalTime(9, 35),
             type = ClassType.LABORATORY,
-            teacher = "Иванов В. П.",
+            fullName = FullName(
+                firstName = "Сергей",
+                middleName = "Сергеевич",
+                lastName = "Сергеев"
+            ),
             classroom = "1 - 201",
             task = taskModel
         )

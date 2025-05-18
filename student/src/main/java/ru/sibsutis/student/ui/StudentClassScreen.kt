@@ -12,9 +12,9 @@ fun StudentClassScreen(viewModel: StudentClassViewModel) {
 
     StudentClassScreenImpl(
         state = state,
-        onValueChange = { viewModel.changeResponseValue(it) },
-        onClick = { viewModel.changeResponseDialogStatus() },
-        onAddResponse = { viewModel.onSendResponse() },
+        onValueChange = viewModel::changeResponseValue,
+        onClick = viewModel::changeResponseDialogStatus,
+        onAddResponse = viewModel::onSendResponse,
         onDismissRequest = {
             viewModel.changeResponseDialogStatus()
             viewModel.resetResponse()

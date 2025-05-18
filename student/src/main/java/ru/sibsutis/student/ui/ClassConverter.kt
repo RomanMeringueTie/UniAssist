@@ -21,7 +21,7 @@ class ClassConverter {
             startTime = classModel.startTime.toString(),
             endTime = classModel.endTime.toString(),
             type = classModel.type,
-            teacher = classModel.teacher,
+            teacher = classModel.fullName.let { "${it.lastName} ${it.firstName} ${it.middleName}" },
             classroom = classModel.classroom,
             task = convertTask(classModel.task)
         )

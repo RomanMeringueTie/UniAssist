@@ -63,7 +63,7 @@ fun StudentAddResponseDialog(
                         decorationBox = { innerTextField ->
                             if (value.isEmpty()) {
                                 Text(
-                                    text = "Ваш ответ на задание",
+                                    text = stringResource(R.string.your_response),
                                     fontSize = 16.sp,
                                     color = Color.Gray,
                                 )
