@@ -17,9 +17,36 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.sibsutis.teacher.R
+import ru.sibsutis.teacher.presentation.TaskState
 
 @Composable
-internal fun TeacherClassContent (classItem: ClassUI) {
+internal fun TeacherClassContent (
+    taskState: TaskState,
+    classItem: ClassUI,
+    isDialogShown: Boolean,
+    textValueHeader: String,
+    textValueBody: String,
+    onValueChangeHeader: (String) -> Unit,
+    onValueChangeBody: (String) -> Unit,
+    onClick: () -> Unit,
+    onAddTask: () -> Unit,
+    onDismissRequest: () -> Unit
+) {
+    if (isDialogShown) {
+        TeacherAddTaskDialog(
+            taskState = taskState,
+            onClick = onAddTask,
+            onDismissRequest = onDismissRequest,
+            onValueChangeHeader = { newValue: String ->
+                onValueChangeHeader(newValue)
+            },
+            onValueChangeBody = { newValue: String ->
+                onValueChangeBody(newValue)
+            },
+            valueHeader = textValueHeader,
+            valueBody = textValueBody
+        )
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,7 +75,7 @@ internal fun TeacherClassContent (classItem: ClassUI) {
         } else {
             Button(
                 modifier = Modifier.padding(top = 20.dp),
-                onClick = {},
+                onClick = onClick,
                 colors = ButtonColors(
                     containerColor = colorResource(id = R.color.blue),
                     contentColor = ButtonDefaults.buttonColors().contentColor,

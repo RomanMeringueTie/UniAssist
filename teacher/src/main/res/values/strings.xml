@@ -11,4 +11,8 @@
     <string name="teacher">Преподаватель</string>
     <string name="unknown_department">Неизвестная кафедра</string>
     <string name="your_qr_code">Ваш электронный пропуск</string>
+    <string name="task_title">Заголовок задания</string>
+    <string name="send_task">Отправить</string>
+    <string name="success">Success</string>
+    <string name="task_text">Текст задания</string>
 </resources>
