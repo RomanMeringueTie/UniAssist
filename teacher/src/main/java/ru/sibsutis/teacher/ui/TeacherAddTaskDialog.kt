@@ -125,7 +125,7 @@ fun TeacherAddTaskDialog(
                     Text(
                         text = stringResource(R.string.send_task),
                         modifier = Modifier.padding(6.dp),
-                        fontSize = 20.sp,
+                        fontSize = 15.sp,
                         textAlign = TextAlign.Center
                     )
                 }

@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.sibsutis.authorization.data.model.UserData
 import ru.sibsutis.teacher.R
 
 @Composable
@@ -41,7 +42,7 @@ internal fun TeacherClassDetails(classItem: ClassUI) {
         } else {
             Text(
                 modifier = textModifier,
-                text = classItem.group,
+                text = UserData.fullName ?: stringResource(R.string.unknown_user),
                 textAlign = TextAlign.Start,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.ExtraBold,
