@@ -2,12 +2,13 @@ package ru.sibsutis.student.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.sibsutis.core.presentation.State
+import ru.sibsutis.student.data.model.ClassModel
 import ru.sibsutis.student.domain.GetStudentClassUseCase
 import ru.sibsutis.student.domain.SendStudentResponseUseCase
 import ru.sibsutis.student.ui.ClassConverter
@@ -60,19 +61,19 @@ class StudentClassViewModel(
         _state.value = _state.value.copy(isDialogShown = _state.value.isDialogShown.not())
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun onSendResponse() {
-        val result =
-            viewModelScope.async {
-                _state.value = _state.value.copy(responseState = ResponseState.Loading)
-                sendStudentResponseUseCase(
+        _state.value = _state.value.copy(responseState = ResponseState.Loading)
+
+        viewModelScope.launch {
+            val result: Result<ClassModel>
+            withContext(Dispatchers.IO) {
+                result = sendStudentResponseUseCase(
                     (_state.value.classState as State.Content).content.id,
                     _state.value.responseValue,
                     id
                 )
             }
-        result.invokeOnCompletion {
-            result.getCompleted().fold(
+            result.fold(
                 onSuccess = {
                     _state.value = _state.value.copy(
                         classState =
@@ -86,9 +87,9 @@ class StudentClassViewModel(
                             it.message ?: "Unknown Error"
                         )
                     )
-                }
-            )
+                })
         }
+
 
     }
 
