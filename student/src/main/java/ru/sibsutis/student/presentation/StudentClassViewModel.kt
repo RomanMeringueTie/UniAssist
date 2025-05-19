@@ -62,7 +62,7 @@ class StudentClassViewModel(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun onSendResponse() {
-        var result =
+        val result =
             viewModelScope.async {
                 _state.value = _state.value.copy(responseState = ResponseState.Loading)
                 sendStudentResponseUseCase(
