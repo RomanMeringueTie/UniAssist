@@ -7,8 +7,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ClassModel(
     @SerialName("id")
-    val id: Int,
-    @SerialName("subject")
+    val id: String,
+    @SerialName("subjectName")
     val subject: String,
     @SerialName("startTime")
     val startTime: LocalTime,
@@ -16,7 +16,7 @@ data class ClassModel(
     val endTime: LocalTime,
     @SerialName("type")
     val type: ClassType,
-    @SerialName("group")
+    @SerialName("groupId")
     val group: String,
     @SerialName("classroom")
     val classroom: String,

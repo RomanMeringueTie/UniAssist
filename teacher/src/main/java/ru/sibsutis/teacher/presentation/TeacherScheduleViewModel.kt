@@ -11,6 +11,7 @@ import ru.sibsutis.teacher.domain.GetTeacherScheduleUseCase
 import ru.sibsutis.teacher.ui.ClassConverter
 
 class TeacherScheduleViewModel(
+    private val classConverter: ClassConverter,
     private val getTeacherScheduleUseCase: GetTeacherScheduleUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(TeacherScheduleState())

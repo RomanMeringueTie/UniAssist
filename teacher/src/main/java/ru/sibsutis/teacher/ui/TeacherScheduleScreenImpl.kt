@@ -10,18 +10,20 @@ import ru.sibsutis.core.ui.LoadingIndicator
 import ru.sibsutis.teacher.presentation.TeacherScheduleState
 
 @Composable
-fun TeacherScheduleScreenImpl(
+internal fun TeacherScheduleScreenImpl(
     state: TeacherScheduleState,
     onSwipeRight: () -> Unit,
     onSwipeLeft: () -> Unit,
-    onRetry: () -> Unit
+    onRetry: () -> Unit,
+    onItemClick: (String) -> Unit
 ) {
     when (state.listState) {
         is State.Content -> {
             TeacherScheduleContent(
                 list = state.listState.content.toImmutableList(),
                 onSwipeRight = onSwipeRight,
-                onSwipeLeft = onSwipeLeft
+                onSwipeLeft = onSwipeLeft,
+                onItemClick = onItemClick
             )
         }
 
