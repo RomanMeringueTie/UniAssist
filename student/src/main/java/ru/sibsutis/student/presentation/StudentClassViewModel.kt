@@ -2,6 +2,8 @@ package ru.sibsutis.student.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -58,15 +60,19 @@ class StudentClassViewModel(
         _state.value = _state.value.copy(isDialogShown = _state.value.isDialogShown.not())
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun onSendResponse() {
-        viewModelScope.launch {
-            _state.value = _state.value.copy(responseState = ResponseState.Loading)
-            val result = sendStudentResponseUseCase(
-                (_state.value.classState as State.Content).content.id,
-                _state.value.responseValue,
-                id
-            )
-            result.fold(
+        var result =
+            viewModelScope.async {
+                _state.value = _state.value.copy(responseState = ResponseState.Loading)
+                sendStudentResponseUseCase(
+                    (_state.value.classState as State.Content).content.id,
+                    _state.value.responseValue,
+                    id
+                )
+            }
+        result.invokeOnCompletion {
+            result.getCompleted().fold(
                 onSuccess = {
                     _state.value = _state.value.copy(
                         classState =
@@ -83,6 +89,7 @@ class StudentClassViewModel(
                 }
             )
         }
+
     }
 
     fun resetResponse() {
