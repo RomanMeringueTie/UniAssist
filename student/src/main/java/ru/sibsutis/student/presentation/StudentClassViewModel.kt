@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.sibsutis.core.presentation.State
-import ru.sibsutis.student.data.model.ClassModel
 import ru.sibsutis.student.domain.GetStudentClassUseCase
 import ru.sibsutis.student.domain.SendStudentResponseUseCase
 import ru.sibsutis.student.ui.ClassConverter
@@ -65,9 +64,8 @@ class StudentClassViewModel(
         _state.value = _state.value.copy(responseState = ResponseState.Loading)
 
         viewModelScope.launch {
-            val result: Result<ClassModel>
-            withContext(Dispatchers.IO) {
-                result = sendStudentResponseUseCase(
+            val result = withContext(Dispatchers.IO) {
+                sendStudentResponseUseCase(
                     (_state.value.classState as State.Content).content.id,
                     _state.value.responseValue,
                     id
@@ -89,7 +87,6 @@ class StudentClassViewModel(
                     )
                 })
         }
-
 
     }
 
