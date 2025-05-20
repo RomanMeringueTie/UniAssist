@@ -10,6 +10,10 @@ import ru.sibsutis.teacher.domain.GetTeacherClassUseCase
 import ru.sibsutis.teacher.domain.GetTeacherClassUseCaseImpl
 import ru.sibsutis.teacher.domain.GetTeacherScheduleUseCase
 import ru.sibsutis.teacher.domain.GetTeacherScheduleUseCaseImpl
+import ru.sibsutis.teacher.domain.SendTeacherMarkUseCase
+import ru.sibsutis.teacher.domain.SendTeacherMarkUseCaseImpl
+import ru.sibsutis.teacher.domain.SendTeacherTaskUseCase
+import ru.sibsutis.teacher.domain.SendTeacherTaskUseCaseImpl
 import ru.sibsutis.teacher.presentation.TeacherClassViewModel
 import ru.sibsutis.teacher.presentation.TeacherScheduleViewModel
 import ru.sibsutis.teacher.ui.ClassConverter
@@ -42,10 +46,20 @@ internal class TeacherModule {
         GetTeacherClassUseCaseImpl(teacherRepository)
 
     @Provides
+    fun provideSendTeacherTaskUseCase(teacherRepository: TeacherRepository): SendTeacherTaskUseCase =
+        SendTeacherTaskUseCaseImpl(teacherRepository)
+
+    @Provides
+    fun provideSendTeacherMarkUseCase(teacherRepository: TeacherRepository): SendTeacherMarkUseCase =
+        SendTeacherMarkUseCaseImpl(teacherRepository)
+
+    @Provides
     fun provideTeacherClassViewModelFactory(
         classConverter: ClassConverter,
-        getTeacherClassUseCase: GetTeacherClassUseCase
+        getTeacherClassUseCase: GetTeacherClassUseCase,
+        sendTeacherTaskUseCase: SendTeacherTaskUseCase,
+        sendTeacherMarkUseCase: SendTeacherMarkUseCase,
     ): (String) -> TeacherClassViewModel = { id ->
-        TeacherClassViewModel(classConverter, getTeacherClassUseCase, id)
+        TeacherClassViewModel(classConverter, getTeacherClassUseCase, sendTeacherTaskUseCase, sendTeacherMarkUseCase, id)
     }
 }

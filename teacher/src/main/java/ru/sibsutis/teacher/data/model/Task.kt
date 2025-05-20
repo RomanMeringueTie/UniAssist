@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Task(
     @SerialName("id")
-    val id: Int,
+    val id: String,
     @SerialName("header")
     val header: String,
     @SerialName("body")

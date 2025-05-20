@@ -12,4 +12,12 @@ class TeacherRepositoryImpl(private val service: TeacherService) : TeacherReposi
     override suspend fun getClass(id: String): ClassModel {
         return service.getClass(id)
     }
+
+    override suspend fun sendTask(id: String, header: String, body: String) {
+        service.sendTask(id, header, body)
+    }
+
+    override suspend fun sendMark(id: String, mark: Int) {
+        service.sendMark(id, mark)
+    }
 }
