@@ -11,4 +11,10 @@
     <string name="unknown_group">Неизвестная группа</string>
     <string name="student">Студент</string>
     <string name="your_qr_code">Ваш электронный пропуск</string>
+    <string name="no_mark">Не оценено</string>
+    <string name="your_responses">"Ваши ответы: "</string>
+    <string name="response_save_success">Ответ успешно загружен</string>
+    <string name="send_response">Отправить</string>
+    <string name="success">Success</string>
+    <string name="your_response">Ваш ответ на задание</string>
 </resources>

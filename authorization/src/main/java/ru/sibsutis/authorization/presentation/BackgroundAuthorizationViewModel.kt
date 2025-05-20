@@ -28,7 +28,7 @@ class BackgroundAuthorizationViewModel(
                     _state.value = State.Content(true)
                     UserData.apply {
                         token = it.token
-                        fullName = it.fullName
+                        fullName = it.fullName.let { "${it.lastName} ${it.firstName} ${it.middleName}" }
                         role.value = it.role
                         unit = it.unit
                     }

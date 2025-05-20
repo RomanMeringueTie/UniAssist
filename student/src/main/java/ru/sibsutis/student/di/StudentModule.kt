@@ -10,6 +10,8 @@ import ru.sibsutis.student.domain.GetStudentClassUseCase
 import ru.sibsutis.student.domain.GetStudentClassUseCaseImpl
 import ru.sibsutis.student.domain.GetStudentScheduleUseCase
 import ru.sibsutis.student.domain.GetStudentScheduleUseCaseImpl
+import ru.sibsutis.student.domain.SendStudentResponseUseCase
+import ru.sibsutis.student.domain.SendStudentResponseUseCaseImpl
 import ru.sibsutis.student.presentation.StudentScheduleViewModel
 import ru.sibsutis.student.ui.ClassConverter
 
@@ -25,6 +27,10 @@ class StudentModule {
     @Provides
     fun provideGetStudentScheduleUseCase(studentRepository: StudentRepository): GetStudentScheduleUseCase =
         GetStudentScheduleUseCaseImpl(studentRepository)
+
+    @Provides
+    fun provideSendStudentResponseUseCase(studentRepository: StudentRepository): SendStudentResponseUseCase =
+        SendStudentResponseUseCaseImpl(studentRepository)
 
     @Provides
     fun provideClassConverter() = ClassConverter()
