@@ -127,27 +127,22 @@ fun AuthorizationScreen(
 
 @Composable
 private fun LoadingOrError(isLoading: Boolean, error: String?) {
-    when (isLoading) {
+    if (isLoading) {
+        LoadingIndicator(modifier = Modifier)
+    } else {
+        error?.let {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .padding(top = 10.dp),
+                textAlign = TextAlign.Center,
+                text = error,
+                color = Color.Red,
+                fontSize = 14.sp
+            )
+        } ?: Spacer(modifier = Modifier.height(40.dp))
 
-        true -> {
-            LoadingIndicator(modifier = Modifier)
-        }
-
-        false -> {
-            error?.let {
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(40.dp)
-                        .padding(top = 10.dp),
-                    textAlign = TextAlign.Center,
-                    text = error,
-                    color = Color.Red,
-                    fontSize = 14.sp
-                )
-            } ?: Spacer(modifier = Modifier.height(40.dp))
-
-        }
     }
 }
 

@@ -61,24 +61,17 @@ class StudentClassViewModel(
     fun onSendResponse() {
         viewModelScope.launch {
             _state.value = _state.value.copy(responseState = ResponseState.Loading)
-            val result = sendStudentResponseUseCase(id, _state.value.responseValue)
+            val result = sendStudentResponseUseCase(
+                (_state.value.classState as State.Content).content.id,
+                _state.value.responseValue,
+                id
+            )
             result.fold(
                 onSuccess = {
-                    _state.value = _state.value.copy(responseState = ResponseState.Content)
-                    val result = getStudentClassUseCase(id)
-                    result.fold(
-                        onSuccess = {
-                            _state.value = _state.value.copy(
-                                classState =
-                                    State.Content(content = classConverter.convertItem(it))
-                            )
-                        },
-                        onFailure = {
-                            _state.value = _state.value.copy(
-                                classState =
-                                    State.Failure(message = it.message ?: "Unknown Error")
-                            )
-                        }
+                    _state.value = _state.value.copy(
+                        classState =
+                            State.Content(content = classConverter.convertItem(it)),
+                        responseState = ResponseState.Content
                     )
                 },
                 onFailure = {

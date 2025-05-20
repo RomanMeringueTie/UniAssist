@@ -1,13 +1,15 @@
 package ru.sibsutis.student.domain
 
+import ru.sibsutis.student.data.model.ClassModel
 import ru.sibsutis.student.data.repository.StudentRepository
 
 class SendStudentResponseUseCaseImpl(private val repository: StudentRepository) :
     SendStudentResponseUseCase {
-    override suspend fun invoke(id: String, body: String): Result<Unit> {
+    override suspend fun invoke(taskId: String, body: String, classId: String): Result<ClassModel> {
         try {
-            val result = repository.sendResponse(id, body)
-            return Result.success(Unit)
+            repository.sendResponse(taskId, body)
+            val result = repository.getClass(classId)
+            return Result.success(result)
         } catch (e: Exception) {
             return Result.failure(e)
         }

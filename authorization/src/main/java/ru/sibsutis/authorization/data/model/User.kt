@@ -17,7 +17,10 @@ data class User(
 
 @Serializable
 data class FullName(
+    @SerialName("lastName")
     val lastName: String,
+    @SerialName("firstName")
     val firstName: String,
+    @SerialName("middleName")
     val middleName: String
 )
