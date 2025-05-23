@@ -39,10 +39,10 @@ fun TeacherAddTaskDialog(
     taskState: TaskState,
     onClick: () -> Unit,
     onDismissRequest: () -> Unit,
-    onValueChangeHeader: (String) -> Unit,
-    onValueChangeBody: (String) -> Unit,
-    valueHeader: String,
-    valueBody: String
+    onValueChangeTitle: (String) -> Unit,
+    onValueChangeContent: (String) -> Unit,
+    valueTitle: String,
+    valueContent: String
 ) {
     AlertDialog (
         modifier = Modifier.padding(10.dp),
@@ -57,13 +57,11 @@ fun TeacherAddTaskDialog(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(10.dp),
-                        value = valueHeader,
+                        value = valueTitle,
                         textStyle = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold),
-                        onValueChange = { it: String ->
-                            onValueChangeHeader(it)
-                        },
+                        onValueChange = onValueChangeTitle,
                         decorationBox = { innerTextField ->
-                            if (valueHeader.isEmpty()) {
+                            if (valueTitle.isEmpty()) {
                                 Text(
                                     text = stringResource(R.string.task_title),
                                     fontSize = 16.sp,
@@ -81,13 +79,11 @@ fun TeacherAddTaskDialog(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(10.dp),
-                        value = valueBody,
+                        value = valueContent,
                         textStyle = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold),
-                        onValueChange = { it: String ->
-                            onValueChangeBody(it)
-                        },
+                        onValueChange = onValueChangeContent,
                         decorationBox = { innerTextField ->
-                            if (valueBody.isEmpty()) {
+                            if (valueContent.isEmpty()) {
                                 Text(
                                     text = stringResource(R.string.task_text),
                                     fontSize = 16.sp,
@@ -115,9 +111,8 @@ fun TeacherAddTaskDialog(
                     modifier = Modifier
                         .padding(top = 6.dp)
                         .height(50.dp),
-                    onClick = {
-                        if (taskState !is TaskState.Loading) onClick()
-                    },
+                    onClick = onClick,
+                    enabled = taskState !is TaskState.Loading,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.blue)
                     )
@@ -179,9 +174,9 @@ private fun Preview_TeacherAddResponseDialog() {
         taskState = TaskState.Loading,
         onClick = {},
         onDismissRequest = {},
-        onValueChangeHeader = {},
-        onValueChangeBody = {},
-        valueHeader = "Создание сетевого приложения",
-        valueBody = "Создать клиентское приложени для соединения с сервером по протоколу FTP"
+        onValueChangeTitle = {},
+        onValueChangeContent = {},
+        valueTitle = "Создание сетевого приложения",
+        valueContent = "Создать клиентское приложени для соединения с сервером по протоколу FTP"
     )
 }

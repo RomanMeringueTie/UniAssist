@@ -6,11 +6,11 @@ import ru.sibsutis.teacher.ui.ClassUI
 data class TeacherClassState (
     val classState: State<ClassUI> = State.Loading,
     val taskState: TaskState = TaskState.Initial,
-    val responseState: ResponseState = ResponseState.Initial,
+    val responseStates: Map<String, ResponseState> = emptyMap(),
     val isDialogShown: Boolean = false,
     val isResponseShown: Boolean = false,
-    val taskValueHeader: String = "",
-    val taskValueBody: String = ""
+    val taskValueTitle: String = "",
+    val taskValueContent: String = ""
 )
 
 sealed interface TaskState {

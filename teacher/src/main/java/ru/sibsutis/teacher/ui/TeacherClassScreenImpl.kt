@@ -13,8 +13,8 @@ import ru.sibsutis.teacher.presentation.TeacherClassState
 @Composable
 internal fun TeacherClassScreenImpl(
     state: TeacherClassState,
-    onValueChangeHeader: (String) -> Unit,
-    onValueChangeBody: (String) -> Unit,
+    onValueChangeTitle: (String) -> Unit,
+    onValueChangeContent: (String) -> Unit,
     onTaskClick: () -> Unit,
     onAddTask: () -> Unit,
     onResponseClick: () -> Unit,
@@ -25,7 +25,7 @@ internal fun TeacherClassScreenImpl(
         is State.Content -> {
             if (state.isResponseShown) {
                 TeacherGradingScreen(
-                    responseState = state.responseState,
+                    responseStates = state.responseStates,
                     classItem = state.classState.content,
                     onClick = onSendMark,
                     onBack = onResponseClick
@@ -36,10 +36,10 @@ internal fun TeacherClassScreenImpl(
                     taskState = state.taskState,
                     classItem = state.classState.content,
                     isDialogShown = state.isDialogShown,
-                    textValueHeader = state.taskValueHeader,
-                    textValueBody = state.taskValueBody,
-                    onValueChangeHeader = onValueChangeHeader,
-                    onValueChangeBody = onValueChangeBody,
+                    textValueTitle = state.taskValueTitle,
+                    textValueContent = state.taskValueContent,
+                    onValueChangeTitle = onValueChangeTitle,
+                    onValueChangeContent = onValueChangeContent,
                     onTaskClick = onTaskClick,
                     onAddTask = onAddTask,
                     onResponseClick = onResponseClick,

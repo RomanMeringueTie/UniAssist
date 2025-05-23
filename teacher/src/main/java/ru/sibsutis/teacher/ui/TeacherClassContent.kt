@@ -24,10 +24,10 @@ internal fun TeacherClassContent (
     taskState: TaskState,
     classItem: ClassUI,
     isDialogShown: Boolean,
-    textValueHeader: String,
-    textValueBody: String,
-    onValueChangeHeader: (String) -> Unit,
-    onValueChangeBody: (String) -> Unit,
+    textValueTitle: String,
+    textValueContent: String,
+    onValueChangeTitle: (String) -> Unit,
+    onValueChangeContent: (String) -> Unit,
     onTaskClick: () -> Unit,
     onAddTask: () -> Unit,
     onResponseClick: () -> Unit,
@@ -38,14 +38,14 @@ internal fun TeacherClassContent (
             taskState = taskState,
             onClick = onAddTask,
             onDismissRequest = onDismissRequest,
-            onValueChangeHeader = { newValue: String ->
-                onValueChangeHeader(newValue)
+            onValueChangeTitle = { newValue: String ->
+                onValueChangeTitle(newValue)
             },
-            onValueChangeBody = { newValue: String ->
-                onValueChangeBody(newValue)
+            onValueChangeContent = { newValue: String ->
+                onValueChangeContent(newValue)
             },
-            valueHeader = textValueHeader,
-            valueBody = textValueBody
+            valueTitle = textValueTitle,
+            valueContent = textValueContent
         )
     }
     Column(

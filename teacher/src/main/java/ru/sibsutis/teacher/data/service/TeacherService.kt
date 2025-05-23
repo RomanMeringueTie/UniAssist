@@ -52,12 +52,12 @@ class TeacherService(private val ktorClient: KtorClient) {
         return result
     }
 
-    suspend fun sendTask(id: String, header: String, body: String) {
+    suspend fun sendTask(id: String, title: String, content: String) {
         delay(1000)
         taskModel = Task(
             id = id,
-            header = header,
-            body = body,
+            header = title,
+            body = content,
             responses = responsesModel
         )
         classModel = classModel.copy(
@@ -68,6 +68,7 @@ class TeacherService(private val ktorClient: KtorClient) {
     suspend fun sendMark(id: String, mark: Int) {
         delay(1000)
         val currentTask = taskModel ?: return
+        //TODO логика обработки nullable Task
         taskModel = currentTask.copy(
             responses = currentTask.responses.map { response ->
                 if (response.id == id) {

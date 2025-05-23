@@ -44,7 +44,7 @@ import ru.sibsutis.teacher.presentation.ResponseState
 
 @Composable
 fun TeacherGradingScreen(
-    responseState: ResponseState,
+    responseStates: Map<String, ResponseState>,
     classItem: ClassUI,
     onClick: (String, Int) -> Unit,
     onBack: () -> Unit
@@ -63,6 +63,7 @@ fun TeacherGradingScreen(
                     .background(color = Color.White)
             ) {
                 items(classItem.task.responses) {
+                    val responseState : ResponseState = responseStates[it.studentId] ?: ResponseState.Initial
                     var responseMark by remember { mutableStateOf(it.mark?.toFloat() ?: 1f)}
                     Column (
                         modifier = Modifier

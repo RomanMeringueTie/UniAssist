@@ -10,8 +10,8 @@ fun TeacherClassScreen(viewModel: TeacherClassViewModel) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     TeacherClassScreenImpl(
         state = state,
-        onValueChangeHeader = viewModel::changeTaskValueHeader,
-        onValueChangeBody = viewModel::changeTaskValueBody,
+        onValueChangeTitle = viewModel::changeTaskValueTitle,
+        onValueChangeContent = viewModel::changeTaskValueContent,
         onTaskClick = viewModel::changeTaskDialogStatus,
         onAddTask = viewModel::onSendTask,
         onResponseClick = viewModel::changeResponseDialogStatus,
