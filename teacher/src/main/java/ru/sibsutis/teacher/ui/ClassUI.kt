@@ -1,7 +1,7 @@
 package ru.sibsutis.teacher.ui
 
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import ru.sibsutis.teacher.data.model.ClassType
 
 data class ClassUI (
@@ -18,10 +18,12 @@ data class ClassUI (
 data class TaskUI(
     val header: String,
     val body: String,
-    val responses: ImmutableList<ResponseUI> = emptyList<ResponseUI>().toImmutableList()
+    val responses: ImmutableList<ResponseUI> = persistentListOf<ResponseUI>()
 )
 
 data class ResponseUI(
+    val id: String,
+    val studentId: String,
     val body: String,
     val mark: Int?
 )

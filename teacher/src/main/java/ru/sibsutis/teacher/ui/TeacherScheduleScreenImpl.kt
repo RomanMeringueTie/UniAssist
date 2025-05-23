@@ -1,8 +1,10 @@
 package ru.sibsutis.teacher.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import kotlinx.collections.immutable.toImmutableList
 import ru.sibsutis.core.presentation.State
 import ru.sibsutis.core.ui.ErrorDialog
@@ -34,6 +36,10 @@ internal fun TeacherScheduleScreenImpl(
             onRetry = onRetry
         )
 
-        is State.Loading -> LoadingIndicator(modifier = Modifier.fillMaxSize())
+        is State.Loading -> LoadingIndicator(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
+        )
     }
 }

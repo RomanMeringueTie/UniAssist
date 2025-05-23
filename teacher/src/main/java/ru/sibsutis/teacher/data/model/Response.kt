@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Response(
     @SerialName("id")
-    val id: Int,
+    val id: String,
     @SerialName("student_id")
-    val studentId: Int,
+    val studentId: String,
     @SerialName("body")
     val body: String,
     @SerialName("mark")

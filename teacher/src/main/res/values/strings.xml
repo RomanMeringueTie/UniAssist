@@ -7,4 +7,14 @@
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="view_answer">Посмотреть ответы</string>
     <string name="add_task">Добавить задание</string>
+    <string name="unknown_user">Неизвестный пользователь</string>
+    <string name="teacher">Преподаватель</string>
+    <string name="unknown_department">Неизвестная кафедра</string>
+    <string name="your_qr_code">Ваш электронный пропуск</string>
+    <string name="task_title">Заголовок задания</string>
+    <string name="send_task">Отправить задание</string>
+    <string name="success">Success</string>
+    <string name="task_text">Текст задания</string>
+    <string name="back">Назад</string>
+    <string name="rate">Оценить</string>
 </resources>
