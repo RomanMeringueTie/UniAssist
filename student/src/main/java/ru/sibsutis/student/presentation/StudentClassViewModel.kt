@@ -60,13 +60,13 @@ class StudentClassViewModel(
         _state.value = _state.value.copy(isDialogShown = _state.value.isDialogShown.not())
     }
 
-    fun onSendResponse() {
+    fun onSendResponse(taskId: String) {
         _state.value = _state.value.copy(responseState = ResponseState.Loading)
 
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
                 sendStudentResponseUseCase(
-                    (_state.value.classState as State.Content).content.id,
+                    taskId,
                     _state.value.responseValue,
                     id
                 )

@@ -15,7 +15,7 @@ internal fun StudentClassScreenImpl(
     state: StudentClassState,
     onValueChange: (String) -> Unit,
     onClick: () -> Unit,
-    onAddResponse: () -> Unit,
+    onAddResponse: (String) -> Unit,
     onDismissRequest: () -> Unit
 ) {
 

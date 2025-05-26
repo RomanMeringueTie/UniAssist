@@ -30,14 +30,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.collections.immutable.ImmutableList
 import ru.sibsutis.core.ui.LoadingIndicator
 import ru.sibsutis.student.R
+import ru.sibsutis.student.data.model.Response
 import ru.sibsutis.student.presentation.ResponseState
 
 @Composable
 fun StudentAddResponseDialog(
+    taskId: String,
     responseState: ResponseState,
-    onClick: () -> Unit,
+    onClick: (String) -> Unit,
     onDismissRequest: () -> Unit,
     onValueChange: (String) -> Unit,
     value: String
@@ -91,7 +94,7 @@ fun StudentAddResponseDialog(
                         .padding(top = 6.dp)
                         .height(50.dp),
                     onClick = {
-                        if (responseState !is ResponseState.Loading) onClick()
+                        if (responseState !is ResponseState.Loading) onClick(taskId)
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.blue)
@@ -152,6 +155,7 @@ fun StudentAddResponseDialog(
 @Composable
 private fun Preview_StudentAddResponseDialog() {
     StudentAddResponseDialog(
+        taskId = "",
         responseState = ResponseState.Loading,
         onClick = {},
         onDismissRequest = {},
