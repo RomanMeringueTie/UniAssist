@@ -6,8 +6,22 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ClassModel(
+    @SerialName("lesson")
+    val lesson: LessonModel,
+    @SerialName("task")
+    val task: Task? = null,
+    @SerialName("solutions")
+    val solutions: List<Response> = emptyList()
+) {
+    init {
+        task?.responses = solutions
+    }
+}
+
+@Serializable
+data class LessonModel(
     @SerialName("id")
-    val id: String,
+    val id: String = "",
     @SerialName("subjectName")
     val subject: String,
     @SerialName("startTime")
@@ -16,10 +30,8 @@ data class ClassModel(
     val endTime: LocalTime,
     @SerialName("type")
     val type: ClassType,
-    @SerialName("groupId")
+    @SerialName("groupName")
     val group: String,
     @SerialName("classroom")
-    val classroom: String,
-    @SerialName("task")
-    val task: Task? = null
+    val classroom: String
 )

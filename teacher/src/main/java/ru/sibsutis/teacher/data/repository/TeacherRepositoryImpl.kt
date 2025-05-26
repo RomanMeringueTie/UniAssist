@@ -2,10 +2,11 @@ package ru.sibsutis.teacher.data.repository
 
 import kotlinx.datetime.LocalDate
 import ru.sibsutis.teacher.data.model.ClassModel
+import ru.sibsutis.teacher.data.model.LessonModel
 import ru.sibsutis.teacher.data.service.TeacherService
 
 class TeacherRepositoryImpl(private val service: TeacherService) : TeacherRepository {
-    override suspend fun getSchedule(date: LocalDate): List<ClassModel> {
+    override suspend fun getSchedule(date: LocalDate): List<LessonModel> {
         return service.getSchedule(date)
     }
 

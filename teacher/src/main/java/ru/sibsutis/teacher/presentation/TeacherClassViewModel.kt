@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.sibsutis.core.presentation.State
+import ru.sibsutis.teacher.data.model.ClassModel
 import ru.sibsutis.teacher.domain.GetTeacherClassUseCase
 import ru.sibsutis.teacher.domain.SendTeacherMarkUseCase
 import ru.sibsutis.teacher.domain.SendTeacherTaskUseCase
@@ -32,10 +33,10 @@ class TeacherClassViewModel (
         viewModelScope.launch {
             val result = getTeacherClassUseCase(id)
             result.fold(
-                onSuccess = {
+                onSuccess = { classModel: ClassModel ->
                     _state.value = _state.value.copy(
                         classState =
-                            State.Content(content = classConverter.convertItem(it))
+                            State.Content(content = classConverter.convertItem(classModel.lesson, classModel.task))
                     )
                 },
                 onFailure = {
@@ -69,10 +70,10 @@ class TeacherClassViewModel (
             _state.value = _state.value.copy(responseStates = (_state.value.responseStates + (studentId to ResponseState.Loading)).toImmutableMap())
             val result = sendTeacherMarkUseCase(id, studentId, newValue)
             result.fold(
-                onSuccess = { classModel ->
+                onSuccess = { classModel: ClassModel ->
                     _state.value = _state.value.copy(
                         responseStates = (_state.value.responseStates + (studentId to ResponseState.Content)).toImmutableMap(),
-                        classState = State.Content(content = classConverter.convertItem(classModel))
+                        classState = State.Content(content = classConverter.convertItem(classModel.lesson, classModel.task))
                     )
                 },
                 onFailure = {
@@ -89,10 +90,10 @@ class TeacherClassViewModel (
             _state.value = _state.value.copy(taskState = TaskState.Loading)
             val result = sendTeacherTaskUseCase(id, _state.value.taskValueTitle, _state.value.taskValueContent)
             result.fold(
-                onSuccess = { classModel ->
+                onSuccess = { classModel: ClassModel ->
                     _state.value = _state.value.copy(
                         taskState = TaskState.Content,
-                        classState = State.Content(content = classConverter.convertItem(classModel))
+                        classState = State.Content(content = classConverter.convertItem(classModel.lesson, classModel.task))
                     )
                 },
                 onFailure = {
