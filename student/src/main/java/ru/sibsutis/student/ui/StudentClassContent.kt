@@ -17,9 +17,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.collections.immutable.toImmutableList
 import ru.sibsutis.student.R
 import ru.sibsutis.student.data.model.ClassType
+import ru.sibsutis.student.data.model.Response
+import ru.sibsutis.student.data.model.Task
 import ru.sibsutis.student.presentation.ResponseState
 
 @Composable
@@ -30,13 +31,14 @@ internal fun StudentClassContent(
     textValue: String,
     onValueChange: (String) -> Unit,
     onClick: () -> Unit,
-    onAddResponse: () -> Unit,
+    onAddResponse: (String) -> Unit,
     onDismissRequest: () -> Unit
 ) {
 
     if (isDialogShown) {
 
         StudentAddResponseDialog(
+            taskId = classItem.task?.id ?: "WRONG",
             responseState = responseState,
             onClick = onAddResponse,
             onDismissRequest = onDismissRequest,
@@ -54,7 +56,7 @@ internal fun StudentClassContent(
     ) {
         StudentClassHeader(classItem = classItem)
         StudentClassDetails(classItem = classItem)
-        if (classItem.task != null)
+        if (classItem.task != null && classItem.response == null)
             Button(
                 onClick = onClick,
                 colors = ButtonColors(
@@ -87,18 +89,16 @@ private fun Preview_StudentClassContent() {
             type = ClassType.LABORATORY,
             teacher = "Иванов В. П.",
             classroom = "1 - 201",
-            task = TaskUI(
-                header = "Лабораторная № 3", body = "Сложная лаба", responses = listOf(
-                    ResponseUI(
-                        body = "Hello, World!",
-                        mark = null
-                    ),
-                    ResponseUI(
-                        body = "Work",
-                        mark = 1
-                    )
-                ).toImmutableList()
-            )
+            task = Task(
+                id = "",
+                header = "Лабораторная № 3",
+                body = "Сложная лаба"
+            ),
+            response = Response(
+                id = "",
+                body = "Hello, World!",
+                mark = null
+            ),
         ),
         isDialogShown = false,
         textValue = "",
