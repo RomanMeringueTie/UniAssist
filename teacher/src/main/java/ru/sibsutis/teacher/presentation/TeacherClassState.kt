@@ -1,12 +1,14 @@
 package ru.sibsutis.teacher.presentation
 
+import kotlinx.collections.immutable.ImmutableMap
+import kotlinx.collections.immutable.persistentMapOf
 import ru.sibsutis.core.presentation.State
 import ru.sibsutis.teacher.ui.ClassUI
 
 data class TeacherClassState (
     val classState: State<ClassUI> = State.Loading,
     val taskState: TaskState = TaskState.Initial,
-    val responseStates: Map<String, ResponseState> = emptyMap(),
+    val responseStates: ImmutableMap<String, ResponseState> = persistentMapOf(),
     val isDialogShown: Boolean = false,
     val isResponseShown: Boolean = false,
     val taskValueTitle: String = "",

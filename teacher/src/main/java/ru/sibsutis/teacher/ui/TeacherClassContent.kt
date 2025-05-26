@@ -38,12 +38,8 @@ internal fun TeacherClassContent (
             taskState = taskState,
             onClick = onAddTask,
             onDismissRequest = onDismissRequest,
-            onValueChangeTitle = { newValue: String ->
-                onValueChangeTitle(newValue)
-            },
-            onValueChangeContent = { newValue: String ->
-                onValueChangeContent(newValue)
-            },
+            onValueChangeTitle = onValueChangeTitle,
+            onValueChangeContent = onValueChangeContent,
             valueTitle = textValueTitle,
             valueContent = textValueContent
         )
