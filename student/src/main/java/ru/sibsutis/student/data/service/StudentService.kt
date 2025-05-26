@@ -23,6 +23,14 @@ data class SendResponse(
 
 class StudentService(private val ktorClient: KtorClient) {
 
+    companion object {
+        /*
+            TODO Перенести в data слой, когда появится возможность отправлять ответы разных типов
+             Сделать полем модели Response
+         */
+        const val TEXT = "TEXT"
+    }
+
     suspend fun getSchedule(date: LocalDate): List<LessonModel> {
         return ktorClient.client.get("schedule/student?date=$date") {
         }.body()
@@ -34,7 +42,7 @@ class StudentService(private val ktorClient: KtorClient) {
 
     suspend fun sendResponse(id: String, body: String) {
         ktorClient.client.post("solution/student") {
-            setBody(SendResponse(taskId = id, body = body, type = "TEXT"))
+            setBody(SendResponse(taskId = id, body = body, type = TEXT))
         }
     }
 }

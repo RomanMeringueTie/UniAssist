@@ -35,10 +35,10 @@ internal fun StudentClassContent(
     onDismissRequest: () -> Unit
 ) {
 
-    if (isDialogShown) {
+    if (isDialogShown && classItem.task != null) {
 
         StudentAddResponseDialog(
-            taskId = classItem.task?.id ?: "WRONG",
+            taskId = classItem.task.id,
             responseState = responseState,
             onClick = onAddResponse,
             onDismissRequest = onDismissRequest,

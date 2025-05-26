@@ -15,6 +15,8 @@ data class ClassModel(
     val response: Response? = null
 )
 
+
+// TODO Сделать отдельную модель для запроса schedule, где нет поля id
 @Serializable
 data class LessonModel(
     @SerialName("id")
