@@ -8,5 +8,17 @@ import ru.sibsutis.teacher.presentation.TeacherClassViewModel
 @Composable
 fun TeacherClassScreen(viewModel: TeacherClassViewModel) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    TeacherClassScreenImpl(state = state)
+    TeacherClassScreenImpl(
+        state = state,
+        onValueChangeTitle = viewModel::changeTaskValueTitle,
+        onValueChangeContent = viewModel::changeTaskValueContent,
+        onTaskClick = viewModel::changeTaskDialogStatus,
+        onAddTask = viewModel::onSendTask,
+        onResponseClick = viewModel::changeResponseDialogStatus,
+        onSendMark = viewModel::onSendMark,
+        onDismissRequest = {
+            viewModel.changeTaskDialogStatus()
+            viewModel.resetTask()
+        }
+    )
 }

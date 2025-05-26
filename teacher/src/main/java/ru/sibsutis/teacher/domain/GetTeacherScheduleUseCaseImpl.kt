@@ -7,11 +7,8 @@ import ru.sibsutis.teacher.data.repository.TeacherRepository
 class GetTeacherScheduleUseCaseImpl(private val repository: TeacherRepository) :
     GetTeacherScheduleUseCase {
         override suspend operator fun invoke(date: LocalDate): Result<List<ClassModel>> {
-            return try {
-                val list = repository.getSchedule(date)
-                Result.success(list)
-            } catch (e: Exception) {
-                Result.failure(e)
+            return repositoryCall {
+                repository.getSchedule(date)
             }
         }
 }

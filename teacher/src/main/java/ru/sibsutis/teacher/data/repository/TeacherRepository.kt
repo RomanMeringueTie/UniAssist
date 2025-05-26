@@ -6,4 +6,6 @@ import ru.sibsutis.teacher.data.model.ClassModel
 interface TeacherRepository {
     suspend fun getSchedule(date: LocalDate): List<ClassModel>
     suspend fun getClass(id: String): ClassModel
+    suspend fun sendTask(id: String, title: String, content: String)
+    suspend fun sendMark(id: String, mark: Int)
 }

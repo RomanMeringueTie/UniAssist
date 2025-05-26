@@ -40,6 +40,8 @@ class ClassConverter {
     private fun convertTaskResponses(responseModelsList: List<Response>): ImmutableList<ResponseUI> {
         return responseModelsList.map {
             ResponseUI(
+                id = it.id,
+                studentId = it.studentId,
                 body = it.body,
                 mark = it.mark
             )
