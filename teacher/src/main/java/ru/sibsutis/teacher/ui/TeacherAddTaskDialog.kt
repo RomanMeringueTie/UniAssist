@@ -35,7 +35,7 @@ import ru.sibsutis.teacher.R
 import ru.sibsutis.teacher.presentation.TaskState
 
 @Composable
-fun TeacherAddTaskDialog(
+internal fun TeacherAddTaskDialog(
     taskState: TaskState,
     onClick: () -> Unit,
     onDismissRequest: () -> Unit,
