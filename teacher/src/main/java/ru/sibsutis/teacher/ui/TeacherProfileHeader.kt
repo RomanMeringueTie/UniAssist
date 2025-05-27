@@ -19,7 +19,7 @@ import ru.sibsutis.authorization.data.model.UserData
 import ru.sibsutis.teacher.R
 
 @Composable
-fun TeacherProfileHeader() {
+internal fun TeacherProfileHeader() {
     Column (
         modifier = Modifier
             .fillMaxWidth()
