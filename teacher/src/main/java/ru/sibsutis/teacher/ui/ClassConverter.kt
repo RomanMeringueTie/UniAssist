@@ -2,28 +2,28 @@ package ru.sibsutis.teacher.ui
 
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
-import ru.sibsutis.teacher.data.model.ClassModel
+import ru.sibsutis.teacher.data.model.LessonModel
 import ru.sibsutis.teacher.data.model.Response
 import ru.sibsutis.teacher.data.model.Task
 
 class ClassConverter {
 
-    fun convertList(classModelList: List<ClassModel>) : List<ClassUI> {
-        return classModelList.map {
-            convertItem(it)
+    fun convertList(lessonModelList: List<LessonModel>) : List<ClassUI> {
+        return lessonModelList.map {
+            convertItem(it, null)
         }
     }
 
-    fun convertItem(classModel: ClassModel): ClassUI {
+    fun convertItem(lesson: LessonModel, task: Task?): ClassUI {
         return ClassUI(
-            id = classModel.id,
-            subject = classModel.subject,
-            startTime = classModel.startTime.toString(),
-            endTime = classModel.endTime.toString(),
-            type = classModel.type,
-            group = classModel.group,
-            classroom = classModel.classroom,
-            task = convertTask(classModel.task)
+            id = lesson.id,
+            subject = lesson.subject,
+            startTime = lesson.startTime.toString(),
+            endTime = lesson.endTime.toString(),
+            type = lesson.type,
+            group = lesson.group,
+            classroom = lesson.classroom,
+            task = convertTask(task)
         )
     }
 
@@ -41,9 +41,9 @@ class ClassConverter {
         return responseModelsList.map {
             ResponseUI(
                 id = it.id,
-                studentId = it.studentId,
                 body = it.body,
-                mark = it.mark
+                mark = it.mark,
+                fullName = it.fullName.let { "${it.lastName} ${it.firstName} ${it.middleName}" }
             )
         }.toImmutableList()
     }

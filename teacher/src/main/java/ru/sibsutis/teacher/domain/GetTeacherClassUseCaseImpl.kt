@@ -1,6 +1,7 @@
 package ru.sibsutis.teacher.domain
 
 import ru.sibsutis.teacher.data.model.ClassModel
+import ru.sibsutis.teacher.data.model.LessonModel
 import ru.sibsutis.teacher.data.repository.TeacherRepository
 
 class GetTeacherClassUseCaseImpl (private val repository: TeacherRepository): GetTeacherClassUseCase {

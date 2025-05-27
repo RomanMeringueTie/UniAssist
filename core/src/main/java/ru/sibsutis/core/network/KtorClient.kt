@@ -23,7 +23,7 @@ class KtorClient(private val tokenProvider: TokenProvider) {
     val client = HttpClient(Android) {
         install(Logging) {
             logger = Logger.ANDROID
-            level = LogLevel.HEADERS
+            level = LogLevel.ALL
         }
         install(ContentNegotiation) {
             json(Json {

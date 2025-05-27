@@ -23,7 +23,7 @@ data class TaskUI(
 
 data class ResponseUI(
     val id: String,
-    val studentId: String,
+    val fullName: String,
     val body: String,
     val mark: Int?
 )

@@ -12,5 +12,5 @@ data class Task(
     @SerialName("body")
     val body: String,
     @SerialName("responses")
-    val responses: List<Response> = emptyList()
+    var responses: List<Response> = emptyList()
 )

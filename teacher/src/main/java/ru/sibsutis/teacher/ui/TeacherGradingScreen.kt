@@ -63,7 +63,7 @@ internal fun TeacherGradingScreen(
                     .background(color = Color.White)
             ) {
                 items(classItem.task.responses) {
-                    val responseState : ResponseState = responseStates[it.studentId] ?: ResponseState.Initial
+                    val responseState : ResponseState = responseStates[it.id] ?: ResponseState.Initial
                     var responseMark by remember { mutableStateOf(it.mark?.toFloat() ?: 1f)}
                     Column (
                         modifier = Modifier
@@ -81,7 +81,7 @@ internal fun TeacherGradingScreen(
                             )
                         Text(
                             modifier = textModifier,
-                            text = it.studentId,
+                            text = it.fullName,
                             textAlign = TextAlign.Start,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.ExtraBold,
