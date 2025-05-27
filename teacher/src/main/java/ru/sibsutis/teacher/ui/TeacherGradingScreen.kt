@@ -43,7 +43,7 @@ import ru.sibsutis.teacher.R
 import ru.sibsutis.teacher.presentation.ResponseState
 
 @Composable
-fun TeacherGradingScreen(
+internal fun TeacherGradingScreen(
     responseStates: Map<String, ResponseState>,
     classItem: ClassUI,
     onClick: (String, Int) -> Unit,
