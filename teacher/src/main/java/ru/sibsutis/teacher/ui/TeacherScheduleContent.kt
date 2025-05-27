@@ -27,7 +27,7 @@ import kotlinx.collections.immutable.ImmutableList
 import ru.sibsutis.teacher.R
 
 @Composable
-fun TeacherScheduleContent(
+internal fun TeacherScheduleContent(
     list: ImmutableList<ClassUI>,
     onSwipeRight: () -> Unit,
     onSwipeLeft: () -> Unit,
