@@ -4,6 +4,8 @@ import kotlinx.datetime.LocalTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+// TODO Переделать модели, чтоб были идентичны тем, что приходят по сети
+
 @Serializable
 data class ClassModel(
     @SerialName("lesson")
